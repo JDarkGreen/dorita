@@ -1,0 +1,928 @@
+@import "compass/css3"
+
+//Importar Fuentes
+
+//Bebas Neue
+@font-face
+	font-family: 'Bebas' 
+	src: url('../../fonts/bebasneue/bebasneue.eot')
+	src: url('../../fonts/bebasneue/bebasneue.eot?#iefix') format('embedded-opentype'), url('../../fonts/bebasneue/bebasneue.woff2') format('woff2'), url('../../fonts/bebasneue/bebasneue.woff') format('woff'), url('../../fonts/bebasneue/bebasneue.ttf')  format('truetype'), url('../../fonts/bebasneue/blogger_sans.svg#svgFontName') format('svg')
+
+//Roboto
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,700,300italic,300)
+
+//Roboto Condensed
+@import url(https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700)
+
+/***************************************************************************************/
+/**-------------------------- VARIABLES ---------------------------------------------**/
+/***************************************************************************************/
+
+//Color 
+
+$theme_gray          : #AEAEAE
+$theme_gray_semiclaro: #CDCDCD
+$theme_gray_claro    : #EBE9EE
+$theme_gray_oscuro   : #7F7F81
+$theme_guinda        : #A70032
+$theme_blue          : #003352
+
+$theme_facebook      : #3A5998
+$theme_twitter       : #00ABF1
+$theme_gplus         : #DB4B39
+
+
+/***************************************************************************************/
+/**-------------------------- RESET --------------------------------------------------**/
+/***************************************************************************************/
+
+body,html
+	font-size: 16px
+	width    : 100% 
+
+
+figure 
+	margin: 0
+
+/***************************************************************************************/
+/**-------------------------- KEYFRAMES  ---------------------------------------------**/
+/***************************************************************************************/
+
+//PULSE
++keyframes( pulse )
+	0%, 100%
+		+translateX( -5px )
+	50%
+		+translateX( 0 )
+
+//EXPAND
++keyframes( expand )
+	0%, 100%
+		+scale( 1.1 )
+	50%
+		+scale( 1.0 )
+
+//CONTRACT
++keyframes( contract )
+	0%
+		+scale( 0 )
+	100%
+		+scale( 1 )
+
+//FLIPIN 
++keyframes( flipInY )
+	0%	
+		+rotateY( -90deg )
+		+opacity( 0 )
+	100%
+		+rotateY( 0deg )
+		+opacity( 1 )
+
+//OPACITY 
++keyframes( opacityInOut )
+	0%
+		+opacity( 0 )
+	100%
+		+opacity( 1 )
+
+//OVERLAYZOOM
++keyframes( overlayZoom )
+	0%
+		background-size: 100% 100%
+	100%
+		background-size: 140% 140%
+
+/***************************************************************************************/
+/**-------------------------- ANIMACIONES CON CLASES ----------------------------------**/
+/***************************************************************************************/
+
+//clase contract
+.contract 
+	+animation( contract 1200ms cubic-bezier( .5 , .5 , .5 , 1.5 ) ) 
+//clase contract
+.flipInY 
+	+animation( flipInY 9s cubic-bezier( 0 , 1 , 1 , 1 ) 1200ms ) 
+//clase overlayZoom
+.overlayZoom
+	+animation( overlayZoom 10s ease-in ) 
+//clase overlayZoom
+.overlayZoomAlternate
+	+animation( overlayZoom 10s ease-in reverse ) 
+
+/***************************************************************************************/
+/**-- SECCIONES - PAGINAS EN COMUN  --------------------------------------------------**/
+/***************************************************************************************/
+
+/*POSICIONES */
+.relative
+	position: relative
+
+//Contenedor con display flex
+.container-flex
+	display        : flex
+	flex-wrap      : wrap 
+	justify-content: center
+
+//Alinear contenidos
+.align-content
+	align-content: center
+	align-items  : center 
+
+//Flechas de Slider en común
+.arrow__common-slider
+	align-items    : center 
+	background     : gray 
+	display        : flex 
+	height         : 40px 
+	justify-content: center 
+	margin         : 0 auto
+	position       : absolute
+	text-decoration: none
+	top            : 50%
+	width          : 40px 
+	z-index        : 999
+	i 
+		color      : white 
+		font-size  : 25px
+		position   : relative 
+
+	//hover 
+	&:hover , &:focus 
+		text-decoration: none 
+	&:hover
+		i 
+			+animation( pulse 700ms cubic-bezier(.5,.5,.5,1.5) infinite )	
+
+//Variaciones
+.arrow__common-slider--prev
+	left: -40px
+.arrow__common-slider--next
+	right: -40px
+
+//+Banners
+//++Banner de Páginas
+.pageCommon__banner
+	font-family: "Roboto Condensed" , sans-serif
+	//Imagen
+	figure 
+		background-size: cover 
+		height         : 142px 
+//+++Título
+.pageCommon__banner__title
+	//+text-shadow( 1px 1px 4px black )
+	color      : $theme_blue
+	font-size  : 35px
+	font-weight: 700
+	left       : 5%
+	margin     : -16px auto 0	
+	position   : absolute
+	top        : 50%
+	//before content
+	&:before 
+		background: $theme_blue
+		bottom    : 0
+		content   : ""
+		height    : 4px 
+		left      : 0
+		margin    : 0 auto
+		position  : absolute
+		right     : 0
+		width     : 82px 
+
+//++Banner de Servicios
+.sectionCommon__banner__services
+	background : $theme_gray_oscuro
+	color      : white 	
+	font-family: "Roboto Condensed" , sans-serif
+	margin     : 0 auto 50px
+	padding    : 28px 0 
+	/* Título */
+	h2 
+		font-size  : 40px 
+		line-height: 1em 
+		margin     : 0 40px 
+
+//+BOTONES
+//++ Botón Ver Más
+.btnCommon__show-more
+	+box-shadow( inset 0 0 0 0 transparent )
+	+transition( color 1000ms ease-in , box-shadow 750ms ease-in-out )
+	background: $theme_guinda
+	border    : 1px solid transparent
+	color     : white 
+	display   : inline-block 
+	font-size : 14px 
+	margin    : 0
+	overflow  : hidden
+	padding   : 8px 30px 
+	text-align: center 
+	//hover y focus
+	&:hover , &:focus
+		color          : white 
+		text-decoration: none 
+	&:hover 
+		+box-shadow( inset 300px 0 0 0 white )
+		border: 1px solid $theme_guinda
+		color : $theme_guinda
+
+//++VARIACION A TRANSPARENTE
+.btnCommon__show-more--transparent
+	background: transparent 
+	border    : 1px solid white 
+	&:hover 
+		+box-shadow( inset 300px 0 0 0 transparent )
+		border: 1px solid white
+		color : white
+
+//+TITULOS
+//++ Titulo de Pagina
+.titleCommon__page
+	line-height: 1em 
+	margin     : 0 auto 25px
+	padding    : 0 0 5px  
+	span 
+		color      : $theme_blue
+		font-family: "Roboto" , sans-serif
+		font-weight: 700 
+		margin     : 0
+		&:before
+			background: $theme_blue
+			bottom    : -4px
+			content   : ""
+			height    : 4px
+			left      : 0
+			margin    : 0 auto
+			position  : absolute
+			right     : 0
+			width     : 124px
+
+//++ Título de seccion de paginas
+.pageSectionCommon__title
+	font-family: "Roboto Condensed" , sans-serif
+	font-size  : 20px
+	font-weight: 600  
+	
+//IMAGEN NOT BLUR ( NO DIFUMINADA )
+.imgNotBlur
+	+transform( scale(1.0) translateZ(0) )
+	-webkit-backface-visibility: hidden
+	backface-visibility        : hidden
+
+//REDES SOCIALES
+//+Redes Sociales - ul
+.social-links
+	display        : inline-block
+	list-style-type: none 
+	margin         : 0
+	padding        : 0 
+	li 
+		display: inline-block
+		padding: 0 8px
+		a 
+			color    : white 
+			display  : block
+			font-size: 20px
+			//Hover
+			&:hover 
+				animation: expand 800ms ease infinite 
+
+//++Variacion de redes sociales a blanco
+.social-links--gray
+	li 
+		a 
+			color: $theme_gray 
+
+//++Variacion de redes sociales a rojo
+.social-links--red
+	li 
+		a 
+
+//BOTÓN HACIA ARRIBA 
+#arrow-up-page
+	+transition( all 500ms ease )
+	background: rgba( 0,0,0, .5 )
+	color     : white 
+	display   : none 
+	font-size : 18px
+	padding   : 6px 13px
+	position  : fixed
+	right     : 3%
+	top       : 86%
+	z-index   : 999999
+	/* Hover */
+	&:hover 
+
+//GALERÍAS DE CAROUSEL
+.section__single_gallery
+	margin: 0 auto 10px 
+
+//Indicadores de Galería
+.gallery_indicators
+	margin: 0 auto 30px 
+	//Indicador
+	.gallery_indicator
+		display        : inline-block
+		margin         : 0 4.5px 
+		max-width      : 131px 
+		text-decoration: none 
+
+//LINEA SEPARADORA
+#separator-line
+	background: $theme_gray
+	height    : 1px 
+	width     : 100%
+
+//CORRECCION IMAGENES CAROUSEL
+.owl-carousel
+	.owl-item 
+		backface-visibility: hidden !important 
+		transform          : translateZ(0) scale(1.0, 1.0) !important
+		figure  
+			background: black 
+		img 
+			transform-style: initial !important 
+
+//COMPARTIR REDES SOCIALES
+.sectionCommon__social-links
+	ul 
+		list-style-type: none 
+		margin         : 35px auto 0
+		padding        : 0 
+		li 
+			display       : inline-block
+			vertical-align: middle
+			a 
+				align-items    : center
+				background     : rgba(0,0,0,0.1)
+				color          : rgba(0,0,0,0.3)
+				display        : flex
+				height         : 25px
+				justify-content: center
+				line-height    : 1em
+				padding        : 0
+				text-decoration: none
+				width          : 25px
+				+transition( all 500ms cubic-bezier(.5,.5,.5,1.5) )
+			//distintos tipos de background
+			&.fb
+				&:hover
+					a 
+						background: $theme_facebook
+						color     : white 			
+			&.tw
+				&:hover
+					a 
+						background: $theme_twitter
+						color     : white 			
+			&.gplus
+				&:hover
+					a 
+						background: $theme_gplus
+						color     : white 
+
+//SIDEBAR COMUN 
+.sidebarCommon
+	font-family: "Roboto Condensed" , sans-serif
+	/* Lins o botoneras */
+	a 
+		+transition( all 500ms ease-in-out )
+		border-bottom  : 1px solid $theme_gray_claro
+		color          : $theme_gray_oscuro
+		display        : block 
+		font-size      : 16px 
+		font-weight    : 600
+		padding        : 14px 0
+		position       : relative
+		text-decoration: none
+		//Icon 
+		i 
+			font-size: 12px
+			position : absolute
+			right    : 4px
+			top      : 40%
+		//active
+		&.active , &:hover 
+			color: $theme_guinda
+/* Titulo sidebar */
+.titleSidebar
+	color      : black 
+	font-size  : 22px
+	font-weight: 600
+
+//Slider de Post y preview de post
+.pagePreview_post
+	ul 
+		list-style-type: none 
+		margin         : 0 
+		padding        : 0 
+	/* Artículos */
+	.articles-item
+		font-family: "Roboto Condensed", sans-serif
+		margin     : 0 auto 28px
+		/* Imagen */
+		figure 
+			margin   : 0 22px 0 0
+			max-width: 187px 
+			overflow : hidden
+			width    : 100%
+			img 
+				+transition( all 3s ease-in )
+		/* Titulo */
+		h3 
+			font-size  : 20px 
+			font-weight: 700
+		/* Parrafp */
+		p 
+			color      : $theme_gray
+			line-height: 1.2em 
+			/* Link del post */
+			a.read-more
+				color          : $theme_guinda
+				display        : inline-block
+				text-decoration: none
+		/* Hover Article */
+		&:hover 
+			figure 
+				img 
+					+scale( 1.2 )
+			/* link del post */
+			a.read-more 
+				animation: expand 2s cubic-bezier(.5,.5,.5,1.5) infinite
+
+/***************************************************************************************/
+/**--  HEADER   ----------------------------------------------------------------------**/
+/***************************************************************************************/
+
+/*[ $HEADER PRINCIPAL ] */
+.mainHeader
+	/* Logo */
+	.logo 
+		margin: 0
+
+/*[ $BARRA DE INFORMACION ] */
+.mainHeader__info
+	border-bottom: 2px solid rgba( 0 , 0, 0 , .1 )
+	padding      : 12px 0
+	//Parrafos
+	p 	
+		color    : $theme_gray
+		font-size: 15px 
+		margin   : 0 6px
+
+/*[ $SLOGAN  ] */
+.mainHeader__slogan
+	color      : gray 
+	font-family: "Roboto Condensed", sans-serif
+	font-size  : 30px 
+	margin     : 0
+	padding    : 22px 0
+
+//NAVEGACIÓN PRINCIPAL
+.mainNavigation
+	background : $theme_guinda 
+	font-family: "Roboto Condensed",sans-serif
+	ul
+		display        : flex 
+		flex-wrap      : wrap 
+		justify-content: space-between
+		list-style-type: none 
+		margin         : 0
+		padding        : 0 22px 
+		li 
+			+box-shadow( inset 0 0 0 0 transparent ) 
+			+transition( all 500ms cubic-bezier(.5,.5,.5,1.5) )
+			margin  : 0 0 2px
+			padding : 14px 0 
+			position: relative
+			a 
+				border-bottom  : 2px solid transparent 
+				color          : white 
+				display        : block 
+				font-size      : 16px 
+				line-height    : 1em 
+				text-decoration: none 
+				text-transform : uppercase
+				+transition( all 500ms cubic-bezier(.5,.5,.5,1.5) )
+			//hover u active li 
+			&:hover , &.current-menu-item , &.current_page_item , &.current-menu-ancestor , &.current-menu-parent
+				a
+					border-bottom  : 2px solid white
+			//hover submenu
+			&:hover 
+				ul.sub-menu
+					max-height: 100em  
+
+		//Submenu 
+		&.sub-menu
+			+transition( max-height 1.5s cubic-bezier( 0,0,0, .1 ) )
+			background: white
+			max-height: 0
+			overflow  : hidden
+			padding   : 0 
+			position  : absolute
+			text-align: center
+			top       : 105%
+			z-index   : 999
+			li 
+				padding: 14px
+				//hover and active 
+				&:hover , &.current-menu-item , &.current_page_item
+					+box-shadow( inset 300px 0 0 0 rgba( 0,0,0, .3 ) )
+				a 
+					border-bottom: 2px solid transparent
+					color        : $theme_guinda
+
+/***************************************************************************************/
+/**--  SLIDEBAR CONTENEDOR -----------------------------------------------------------**/
+/***************************************************************************************/
+
+#sb-site
+	//padding: 100px 0 0 0
+
+/***************************************************************************************/
+/**--  WRAPPER GENERAL ---------------------------------------------------------------**/
+/***************************************************************************************/
+
+//Contenedor General 
+.pageWrapper
+	margin: 65px 0
+
+/***************************************************************************************/
+/**--  PAGINA INICIO  ----------------------------------------------------------------**/
+/***************************************************************************************/
+
+//Slider De Página
+.pageInicio__slider
+	//Wrapper
+	.carousel-inner
+		//Carousel Item
+		.carousel-item
+			background-repeat    : no-repeat
+			background-size      : 100% 100%
+			height               : 485px
+			+transition( 1s ease-in-out left !important )
+
+			//Información Caption Ti´tulo y parrafp
+			.carousel-caption
+				font-family: "Roboto",sans-serif
+				left       : 10%
+				max-width  : 280px
+				padding    : 0
+				right      : inherit
+				text-align : left
+				top        : 30%
+				word-break : break-all
+				h3 , p 
+					line-height: 1em 
+				h3 
+					color      : $theme_blue
+					font-weight: 700
+				p 
+					font-size  : 30px
+
+/* Flechas de Slider */
+.arrowSliderHome
+	margin: -20px auto 0
+.arrowSliderHome--prev
+	left : 2%
+.arrowSliderHome--next 
+	right: 2%
+	
+//SECCIÓN DE SERVICIOS
+.pageInicio__services
+	background: $theme_gray_claro
+	padding   : 39px 0 24px 
+
+/* GaLería de SERVICIOS */
+.pageInicio_gal_services
+	//Articulos
+	.item-service
+		font-family: "Roboto Condensed" , sans-serif
+		//Imagen
+		figure 
+			margin    : 0 auto 30px 
+			max-height: 100px 
+			overflow  : hidden
+			img 
+				+transition( all 900ms ease-in )
+		//Titulo
+		h3 
+			font-size  : 20px 
+			font-weight: 600
+			line-height: 1em 
+			margin     : 0 auto 16px 
+		//Extracto o parrafo
+		p 
+			margin: 0 auto 35px
+		//Hover Article
+		&:hover 
+			figure 
+				img 
+					+scale( 1.2 )
+
+/* Flechas de Carousel Servicios */
+.arrowHomeSliderServices-prev
+	right: 43px 
+	top  : -80px 	
+.arrowHomeSliderServices-next
+	right: 0px 
+	top  : -80px 
+
+// SECCION MISCELANEO
+.pageInicio__miscelaneo
+	padding: 50px 0 
+
+
+/***************************************************************************************/
+/**--  PAGINA NOSOTROS  --------------------------------------------------------------**/
+/***************************************************************************************/
+
+// SECCIÓN DESCRIPCIÓN
+.pageNosotros__description
+	background: $theme_gray_claro
+	padding   : 80px 0
+
+	/* Sobreescribiendo las flechas de carousel */
+	.arrowCarouselNosotros-prev
+		left: 42%
+	.arrowCarouselNosotros-next
+		left: 50%
+
+//SECCIÓN APTITUDES
+.pageNosotros__aptitudes
+	font-family: "Roboto Condensed" , sans-serif
+	padding    : 60px 0
+	/* Subtitulos de item */
+	h3 
+		//font-size  : 20px 
+		//font-weight: 600
+	/* Contenido de Item */
+	p 
+		font-size  : 15px 
+		line-height: 1.4em 
+
+/* Contenido de texto */
+.pageNosotros__content
+	font-family: "Roboto Condensed" , sans-serif 
+	/* titulos */
+	h1 , h2 , h3
+		font-size: 26px  
+	/* Subtitulo */
+	h4, h5 ,h6
+		font-size: 19px
+	/* P+arrafp */
+	p 
+		font-size: 18px
+
+
+/***************************************************************************************/
+/**--  PAGINA STAFF ----------------------------------------------------------------**/
+/***************************************************************************************/
+
+/* Item o artículo del miembro del staff */
+.articleItemStaff
+	font-family: "Roboto Condensed" , sans-serif
+	margin     : 0 15px 60px 
+	/* Para los párrafos */
+	p 
+		font-size  : 16px
+		line-height: 1.4em
+
+/***************************************************************************************/
+/**--  PAGINA CLIENTE ----------------------------------------------------------------**/
+/***************************************************************************************/
+
+/* Articulo o Item de Cliente */
+.itemCliente
+	font-family: "Roboto Condensed" , sans-serif
+	margin     : 0 auto 25px 
+	/* Imagen */
+	figure 
+		margin  : 0 auto 30px
+		overflow: hidden
+		img 
+			+transition( all 500ms ease-in )
+		//hover image
+		&:hover 
+			img 
+				+scale( 1.2 )
+
+/* Contenido de Item de cliente */
+.itemCliente__content 
+	margin: 10px auto 0
+	/* Para las listas */
+	ul 
+		margin : 0 
+		padding: 0 0 0 20px
+
+
+/***************************************************************************************/
+/**--  PAGINA BLOG  ----------------------------------------------------------------**/
+/***************************************************************************************/
+
+/* Sobreescribiendo flechas de carousel sección Blog */
+.arrowCarouselBlog-prev
+	right: 6%
+.arrowCarouselBlog-next
+	right: 0
+
+/* Articulo de blog */
+.pageBlog__article
+	font-family: "Roboto Condensed" , sans-serif
+	/* Titulo */
+	h3 
+		font-size  : 30px 
+		font-weight: 600 
+
+/***************************************************************************************/
+/**--  PÁGINA CONTACTO ---------------------------------------------------------------**/
+/***************************************************************************************/
+
+/* Lista de Página Contacto */
+.pageContact__list-data
+	font-family    : "Roboto Condensed" , sans-serif 
+	list-style-type: none 
+	padding        : 0 0 0 35px
+	li 
+		display  : flex
+		flex-wrap: wrap
+		//Icono
+		i 
+			height: 20px 
+			margin: 0 11px 0 -30px
+			width : 20px 
+		//Párrafo
+		p 
+			margin: 0 auto 5px
+			width : 99%
+
+/* Separación Página de Contacto */
+#pageContact__separation
+	height: 1px 
+	margin: 44px auto
+
+/* Formulario de Contacto */
+.pageContacto__form
+	max-width: 380px 
+	width    : 100%
+
+/* Grupo inputs y textarea dentro de formulario */
+.pageContacto__form__group
+	margin: 0 auto 13px
+	/* inputs y texarea */
+	input , textarea
+		+border-radius( 4px )
+		border : 1px solid $theme_gray_semiclaro
+		color  : $theme_gray_oscuro
+		outline: 0
+		padding: 5px 7px 
+		width  : 100%
+	/* Solo texarea */
+	textarea
+		height    : 135px 
+		max-height: 135px 
+
+//SECCIÓN DE MAPA
+.pageContact__map
+
+#canvas-map
+	height: 400px 
+	width : 100%
+
+
+/***************************************************************************************/
+/**--  MAIN FOOTER  ------------------------------------------------------------------**/
+/***************************************************************************************/
+
+//SECCIÓN
+.mainFooter
+	color      : white
+	font-family: "Roboto Condensed", sans-serif
+//Subtítulos 
+.mainFooter__subtitle
+	font-size  : 18px 
+	font-weight: 700 
+	margin     : 0 auto 20px 
+/* Lista de Datos */
+.mainFooter__list-data
+	list-style-type: none 
+	margin         : 0 10% 
+	padding        : 0 0 0 35px
+	li 
+		display  : flex
+		flex-wrap: wrap
+		//Icono
+		i 
+			height: 20px 
+			margin: 0 11px 0 -30px
+			width : 20px 
+		//Párrafo
+		p 
+			margin: 0 auto 5px
+			width : 99%
+
+/* Item de Footer contiene informaciones */
+.mainFooter__item
+	border-right: 2px solid rgba( 255,255,255 , .4 )
+	height      : 160px 
+
+//++Seccion de Informacion
+.mainFooter__information
+	background: $theme_guinda
+	padding   : 34px 0 24px 
+//++Seccion de Desarrollo
+.mainFooter__develop
+	background: $theme_blue
+	font-size : 13px 
+	padding   : 5px 0
+	/* Link */
+	a 
+		color: white
+
+
+
+
+/************************************************************************************/
+/*-- MEDIA QUERIES -----------------------------------------------------------------*/
+/************************************************************************************/
+
+
+//MENOR A 640PX 
+@media ( max-width: 640px )
+
+	//$$$$ Slider de Post y preview de post $$$$
+	.pagePreview_post 
+		.articles-item 
+			figure
+				margin   : 0 auto 15px 
+				max-width: initial
+	
+	/* Contenedor SB SLIDER PARA MOBILE */
+	#sb-site
+		padding: 100px 0 0 0
+
+	// $$PAGINA COMUN BANNER DE PAGINA 
+	.pageCommon__banner 
+		figure
+			background-position: top center
+
+	// $$$ SIDEBAR COMUN
+	.sidebarCommon
+		background: white
+		margin    : 30px 5px
+		padding   : 10px
+
+
+	// $$$ HEADER 
+	.mainHeader
+		background: white 
+		left      : 0
+		position  : fixed
+		right     : 0
+		z-index   : 99999
+		//Logo
+		.logo 
+			margin   : 0 25px 
+			max-width: 150px
+		//Íconos
+		.icon-header 
+			font-size: 40px
+	
+	// $$$ MAIN NAVIGATION 
+	.mainNavigation 
+		margin: 30px auto
+		ul 
+			li
+				display: block
+				width  : 100%
+				a 
+					font-size: 20px
+
+		//Submenu		
+		ul.sub-menu
+			position: relative
+
+	// $$$$ PAGINA INICIO
+
+	/* Carousel Home */
+	.pageInicio__slider 
+		.carousel-inner 
+			.carousel-item
+				background-position: top right 
+				background-size    : cover 
+				height             : 400px
+				.carousel-caption
+					left     : 20%
+					max-width: 200px
+
+	// $$$ PÁGINA BLOG
+	.arrowCarouselBlog-prev
+		right: 15%
+
+	// $$$$ FOOTER $$ 
+
+	/* Footer Item */
+	.mainFooter__item
+		border-right: none
+		height      : auto
+		margin      : 0 auto 30px
