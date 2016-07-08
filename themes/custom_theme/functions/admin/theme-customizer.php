@@ -4,7 +4,7 @@
 /***********************************************************************************************/
 add_action('admin_menu', 'display_custom_options_link');
 function display_custom_options_link() {
-	add_theme_page('Tributary Opciones', 'Tributary Opciones', 'edit_theme_options', 'customize.php');
+	add_theme_page( get_bloginfo('name') . ' Opciones' , get_bloginfo('name') . ' Opciones' , 'edit_theme_options', 'customize.php');
 }
 
 /***********************************************************************************************/
@@ -31,9 +31,32 @@ function theme_customize_register($wp_customize) {
 	)));
 
 	/*|-----------------------------------------------------------------------|*/
+	/*|-- SECCION HEADER --|*/
 	/*|-----------------------------------------------------------------------|*/
 
-	####>>>>>>>>>>>> MISION Y VISIÓN >>>>>>>>>>>>>>>>>>
+	# Agregar Sección
+	$wp_customize->add_section('theme_header', array(
+		'title'       => __('Header Principal', LANG),
+		'description' => __('Sección Header Principal', LANG),
+		'priority'    => 35
+	));	
+	# Agregar Setting customizar background header principal
+	$wp_customize->add_setting('theme_custom_settings[image_backheader]', array(
+		'default' =>  IMAGES . '/backgrounds/inicio_baner_menu_la_dorita_frutas_pulpas_lima_peru.jpg',
+		'type'    => 'theme_mod'
+	));
+	# Agregar Control customizar background header principal
+	$wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'image_backheader', array(
+		'label'    => __('Carga tu Imágen Fondo Header: 1920 X 191', LANG),
+		'section'  => 'theme_header',
+		'settings' => 'theme_custom_settings[image_backheader]'
+	)));
+
+
+
+	/*|-----------------------------------------------------------------------|*/
+	/*|-- SECCION MISION Y VISION --|*/
+	/*|-----------------------------------------------------------------------|*/
 	$wp_customize->add_section('theme_mision_vision', array(
 		'title' => __('Historia Misión y Visión Empresa', LANG),
 		'description' => __('Sección Misión y Visión Empresa', LANG),
@@ -109,9 +132,8 @@ function theme_customize_register($wp_customize) {
 	)); */
 
 	/*|-----------------------------------------------------------------------|*/
+	/*|-- SECCION REDES SOCIALES --|*/
 	/*|-----------------------------------------------------------------------|*/
-
-	####>>>>>>>>>>>> REDES SOCIALES >>>>>>>>>>>>>>>>>>
 	$wp_customize->add_section('theme_redes_sociales', array(
 		'title' => __('Redes Sociales', LANG),
 		'description' => __('Sección Redes Sociales', LANG),
@@ -162,8 +184,9 @@ function theme_customize_register($wp_customize) {
 		'type'     => 'text'
 	));
 
-	
-	// Contact Email
+	/*|-----------------------------------------------------------------------|*/
+	/*|-- SECCION CONTACTO EMAIL --|*/
+	/*|-----------------------------------------------------------------------|*/
 	$wp_customize->add_section('theme_contact_email', array(
 		'title' => __('Seccion Correos', LANG),
 		'description' => __('Escribe el Correo Contacto Correspondiente', LANG),
@@ -209,7 +232,10 @@ function theme_customize_register($wp_customize) {
 		'type'     => 'text'
 	)); */
 
-	//Customizar celular
+	
+	/*|-----------------------------------------------------------------------|*/
+	/*|-- SECCION CELULARES  --|*/
+	/*|-----------------------------------------------------------------------|*/
 	$wp_customize->add_section('theme_contact_cel', array(
 		'title' => __('Celulares de Contacto', LANG),
 		'description' => __('Escribir números correspondientes', LANG),
@@ -229,8 +255,9 @@ function theme_customize_register($wp_customize) {
 		'type'     => 'text'
 	));	
 
-
-	//Customizar telefono
+	/*|-----------------------------------------------------------------------|*/
+	/*|-- SECCION TELEFONOS  --|*/
+	/*|-----------------------------------------------------------------------|*/
 	$wp_customize->add_section('theme_contact_tel', array(
 		'title' => __('Telefono de Contacto', LANG),
 		'description' => __('Telefono de Contacto', LANG),
@@ -251,7 +278,7 @@ function theme_customize_register($wp_customize) {
 	));	
 
 	//Telefono 2 
-	$wp_customize->add_setting('theme_custom_settings[contact_tel_2]', array(
+	/*$wp_customize->add_setting('theme_custom_settings[contact_tel_2]', array(
 		'default' => '',
 		'type' => 'theme_mod'
 	));
@@ -261,10 +288,12 @@ function theme_customize_register($wp_customize) {
 		'section'  => 'theme_contact_tel',
 		'settings' => 'theme_custom_settings[contact_tel_2]',
 		'type'     => 'text'
-	));	
+	));	*/
 
 
-	//Customizar Direccion
+	/*|-----------------------------------------------------------------------|*/
+	/*|-- SECCION DIRECCIÓN  --|*/
+	/*|-----------------------------------------------------------------------|*/
 	$wp_customize->add_section('theme_contact_address', array(
 		'title' => __('Direccion de Contacto', LANG),
 		'description' => __('Direccion de Contacto', LANG),
@@ -284,7 +313,9 @@ function theme_customize_register($wp_customize) {
 		'type'     => 'textarea'
 	));	
 
-	//Customizar MAPA
+	/*|-----------------------------------------------------------------------|*/
+	/*|-- SECCION MAPA DE CONTACTO  --|*/
+	/*|-----------------------------------------------------------------------|*/
 	$wp_customize->add_section('theme_contact_mapa', array(
 		'title' => __('Mapa de Contacto', LANG),
 		'description' => __('Mapa de Contacto', LANG),
@@ -317,7 +348,9 @@ function theme_customize_register($wp_customize) {
 		'type'     => 'text'
 	));		
 
-	//Customizar WIDGET NOSOTROS
+	/*|-----------------------------------------------------------------------|*/
+	/*|-- SECCION NOSOTROS PORTADA  --|*/
+	/*|-----------------------------------------------------------------------|*/
 	/*$wp_customize->add_section('theme_widget_nosotros', array(
 		'title' => __('Sección Nosotros', LANG),
 		'description' => __('Sección Nosotros', LANG),

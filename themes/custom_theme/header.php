@@ -28,7 +28,7 @@
 <body <?php body_class(); ?> >
 	
 	<?php 
-		$options = get_option('theme_custom_settings'); 
+		$theme_mod = get_theme_mod( 'theme_custom_settings' ); 
 		global $post;
 
 		//Comprobar si esta desplegada la barra de Navegación
@@ -40,87 +40,76 @@
 <!-- Contenedor Version Desktop -->
 <header class="mainHeader hidden-xs-down relative">
 
-		<!-- Barra de Información -->
-		<section class="mainHeader__info">
-
-			<!-- Contenedor -->
-			<div class="container">
-
-				<!-- Lista de Redes Sociales -->
-				<ul class="social-links social-links--gray pull-xs-left">
-					<!-- Facebook -->
-					<?php if( isset($options['red_social_fb']) && !empty($options['red_social_fb']) ) : ?>
-						<li><a target="_blank" href="<?= $options['red_social_fb']; ?>">
-							<i class="fa fa-facebook" aria-hidden="true"></i>
-						</a></li>
-					<?php endif; ?>
-					<!-- Twitter -->
-					<?php if( isset($options['red_social_twitter']) && !empty($options['red_social_twitter']) ): ?>
-						<li><a target="_blank" href="<?= $options['red_social_twitter']; ?>"><i class="fa fa-twitter" aria-hidden="true"></i></a> </li>
-					<?php endif; ?>
-					<!-- Youtube -->
-					<?php if( isset($options['red_social_ytube']) && !empty($options['red_social_ytube']) ) : ?>
-						<li><a target="_blank" href="<?= $options['red_social_ytube']; ?>"><i class="fa fa-youtube" aria-hidden="true"></i></a> </li>
-					<?php endif; ?>
-				</ul> <!-- /.social-links -->
-
-				<!-- Seccion  Solo de Informacion  -->
-				<div class="mainHeader__info__content container-flex align-content pull-xs-right">
-					<!-- Email -->
-					<?php if( isset($options['contact_email']) && !empty($options['contact_email']) ) :
-					?>
-					<p> <!-- Icono --> 
-						<i class="fa fa-envelope" aria-hidden="true"></i>
-						<?= $options['contact_email']; ?>
-					</p>
-					<?php endif; ?>
-
-					<!-- Teléfonos -->
-					<?php 
-						if( isset($options['contact_tel']) && !empty($options['contact_tel']) ) :
-						$numeros = $options['contact_tel']; 
-						$numeros = explode(",", $numeros ); /* Obtener el primero numero */
-					?>
-						<p>
-							<!-- Icono -->
-							<i class="fa fa-phone" aria-hidden="true"></i>
-							<?= $numeros[0] ?>
-						</p>
-					<?php endif; ?>
-				</div> <!-- /.mainHeader__info__content -->	
-
-			</div> <!-- /.container -->
-
-		</section> <!-- /.mainHeader__info container-flex -->
-
-		<!-- SEGUNDA PARTE LOGO Y NAGEGACION PRINCIPAL -->
+	<!-- Primera sección Contenedor de Información y Pedido -->
+	<?php  
+		# Extraemos el fondo header de las opciones del tema
+		$bg_header = isset($theme_mod['image_backheader']) && !empty($theme_mod['image_backheader']) ? $theme_mod['image_backheader'] : IMAGES . '/backgrounds/inicio_baner_menu_la_dorita_frutas_pulpas_lima_peru.jpg';
+	?>
+	<section class="mainHeader__info" style="background-image: url(<?= $bg_header; ?>);">
 		<div class="container">
+			<!-- Contenedor de pedido y telefonos -->
+			<div class="sectionDataInfo text-xs-center pull-xs-right">
+				<!-- Titulo --> <h2 class=""> <?php _e("Haz tu Pedido Ya!" , LANG ); ?></h2>
+				<!-- Contenedor flexible -->
+				<div class="container-flex-align-content">
+					<!-- Email -->
+					<?php if( isset($theme_mod['contact_email']) && !empty($theme_mod['contact_email']) ) : ?>
+						<span> <!-- Icono --> <i class="fa fa-envelope" aria-hidden="true"></i> 
+						<?= $theme_mod['contact_email']; ?>
+						</span>
+					<?php endif; ?>
+					<!-- Teléfono -->
+					<?php if( isset($theme_mod['contact_tel']) && !empty($theme_mod['contact_tel']) ) : ?>
+						<span> <!-- Icono --> <i class="fa fa-phone" aria-hidden="true"></i> 
+						<?php  
+							#Obtener el string telefono, convertirlo a array y luego mostrar el primero
+							$telefonos = $theme_mod['contact_tel'];
+							$telefonos = explode( ",",  $telefonos );
+							echo $telefonos[0];
+						?>
+						</span>
+					<?php endif; ?>
 
-			<div class="row">
-				<div class="col-xs-5">
-					<!-- Logo Principal -->
-					<h1 class="logo">
-						<a href="<?= site_url() ?>">
-							<img src="<?= IMAGES ?>/logo.png" alt="tributario-contabilidad-auditoría-tributación-asesoría-laboral-financiera-administrativo-peru" class="img-fluid center-block" />
-						</a>
-					</h1> <!-- /.lgoo -->
-				</div> <!-- /.col-xs-5 -->
-				<div class="col-xs-7">
-					<!-- Seccion Slogan -->
-					<h2 class="mainHeader__slogan text-xs-right"><?php _e( "Contabilidad & Soluciones Empresariales" , LANG ); ?></h2>
-					<!-- Navegacion Principal -->
-					<nav class="mainNavigation">
-						<?php wp_nav_menu(
-							array(
-								'menu_class'     => 'main-menu text-center',
-								'theme_location' => 'main-menu'
-							));
-						?>			
-					</nav> <!-- /.mainNavigation -->
-				</div> <!-- /.col-xs-7 -->
-			</div> <!-- /.row -->
+				</div><!-- /.container-flex-align-content -->
+			</div> <!-- /. -->
+		</div> <!-- /.container -->
+	</section> <!-- /.mainHeader__info -->
+
+	<!-- Segunda Sección Navegación Principal -->
+	<nav class="mainNavigation">
+		<div class="container container-flex">
+			<!-- Menu de Navegacion Izquierda -->
+			<?php wp_nav_menu(
+				array(
+					'menu_class'     => 'main-menu',
+					'theme_location' => 'left-main-menu'
+				));
+			?>
+
+			<!-- Logo Principal -->
+			<h1 class="logo">
+				<a href="<?= site_url() ?>">
+					<?php  
+						# Conseguimos la ruta del logo mediante las opciones del tema 
+						# Si no lo dejamos por defecto
+						$img_logo = isset($theme_mod['logo']) && !empty($theme_mod['logo']) ? $theme_mod['logo'] : IMAGES . "/logo.png";
+					?>
+					<img src="<?= $img_logo; ?>" alt="la-dorita-pulpas-frutas-nectares-almibar" class="img-fluid center-block" />
+				</a>
+			</h1> <!-- /.lgoo -->				
+
+			<!-- Menu de Navegacion Derecha -->
+			<?php wp_nav_menu(
+				array(
+					'menu_class'     => 'main-menu',
+					'theme_location' => 'right-main-menu'
+				));
+			?>	
 
 		</div> <!-- /.container -->
+	</nav> <!-- /.mainNavigation -->
+
+
 
 </header> <!-- /.mainHeader  -->
 

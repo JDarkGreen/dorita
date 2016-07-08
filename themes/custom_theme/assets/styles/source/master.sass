@@ -8,6 +8,18 @@
 	src: url('../../fonts/bebasneue/bebasneue.eot')
 	src: url('../../fonts/bebasneue/bebasneue.eot?#iefix') format('embedded-opentype'), url('../../fonts/bebasneue/bebasneue.woff2') format('woff2'), url('../../fonts/bebasneue/bebasneue.woff') format('woff'), url('../../fonts/bebasneue/bebasneue.ttf')  format('truetype'), url('../../fonts/bebasneue/blogger_sans.svg#svgFontName') format('svg')
 
+//Raleway
+@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600,700)
+
+//Lobster
+@import url(https://fonts.googleapis.com/css?family=Lobster)
+
+//Fredoka+One
+@import url(https://fonts.googleapis.com/css?family=Fredoka+One)
+
+//PT+Sans
+@import url(https://fonts.googleapis.com/css?family=PT+Sans)
+
 //Roboto
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,700,300italic,300)
 
@@ -27,6 +39,11 @@ $theme_gray_oscuro   : #7F7F81
 $theme_guinda        : #A70032
 $theme_blue          : #003352
 
+// Actualización de Colores
+$theme_green : #0F6800
+$theme_yellow: #FFE700
+
+
 $theme_facebook      : #3A5998
 $theme_twitter       : #00ABF1
 $theme_gplus         : #DB4B39
@@ -37,12 +54,9 @@ $theme_gplus         : #DB4B39
 /***************************************************************************************/
 
 body,html
-	font-size: 16px
-	width    : 100% 
-
-
-figure 
-	margin: 0
+	font-family: "Arial" , sans-serif
+	font-size  : 16px
+	width      : 100% 
 
 /***************************************************************************************/
 /**-------------------------- KEYFRAMES  ---------------------------------------------**/
@@ -292,11 +306,6 @@ figure
 		a 
 			color: $theme_gray 
 
-//++Variacion de redes sociales a rojo
-.social-links--red
-	li 
-		a 
-
 //BOTÓN HACIA ARRIBA 
 #arrow-up-page
 	+transition( all 500ms ease )
@@ -309,8 +318,6 @@ figure
 	right     : 3%
 	top       : 86%
 	z-index   : 999999
-	/* Hover */
-	&:hover 
 
 //GALERÍAS DE CAROUSEL
 .section__single_gallery
@@ -449,25 +456,49 @@ figure
 			a.read-more 
 				animation: expand 2s cubic-bezier(.5,.5,.5,1.5) infinite
 
+/*[ $BACKGROUNDS ] */
+
+//Fondo background de secciones
+.sectionBackgroundFruts
+	background: url('../../images/backgrounds/fondo_web_la_dorita_frutas_pulpas_lima_peru.jpg') no-repeat 
+
+
 /***************************************************************************************/
 /**--  HEADER   ----------------------------------------------------------------------**/
 /***************************************************************************************/
 
 /*[ $HEADER PRINCIPAL ] */
 .mainHeader
-	/* Logo */
+	// Logo 
 	.logo 
-		margin: 0
+		margin   : -103px 0 0
+		max-width: 196px
 
 /*[ $BARRA DE INFORMACION ] */
 .mainHeader__info
-	border-bottom: 2px solid rgba( 0 , 0, 0 , .1 )
-	padding      : 12px 0
-	//Parrafos
-	p 	
-		color    : $theme_gray
-		font-size: 15px 
-		margin   : 0 6px
+	background-size: cover 
+	height         : 1%
+	height         : 133px 
+	overflow       : hidden
+
+/*[ $SECCION DE INFORMACIÓN DE PEDIDOS  ] */
+.sectionDataInfo
+	background: $theme_green
+	color     : white
+	padding   : 8px 16px 
+	+border-radius( 0 0 15px 15px )
+	// Título
+	h2 
+		font-family: 'PT Sans', sans-serif
+		font-size  : 20px
+		font-style : italic
+		font-weight: 700
+		line-height: 1em 
+		margin     : 0 auto 5px 
+	//Span o Informaciones
+	span 
+		font-family: 'Fredoka One', cursive
+		margin     : 0 5px
 
 /*[ $SLOGAN  ] */
 .mainHeader__slogan
@@ -479,34 +510,36 @@ figure
 
 //NAVEGACIÓN PRINCIPAL
 .mainNavigation
-	background : $theme_guinda 
-	font-family: "Roboto Condensed",sans-serif
+	background-image : url("../../images/backgrounds/fondo_menu.jpg") 
+	background-repeat: no-repeat
+	background-size  : contain
+	font-family      : 'Raleway', sans-serif
 	ul
-		display        : flex 
-		flex-wrap      : wrap 
-		justify-content: space-between
 		list-style-type: none 
 		margin         : 0
-		padding        : 0 22px 
+		display        : inline-block
 		li 
 			+box-shadow( inset 0 0 0 0 transparent ) 
 			+transition( all 500ms cubic-bezier(.5,.5,.5,1.5) )
-			margin  : 0 0 2px
-			padding : 14px 0 
+			display : inline-block
+			padding : 0 14px 
 			position: relative
 			a 
+				+transition( all 500ms cubic-bezier(.5,.5,.5,1.5) )
 				border-bottom  : 2px solid transparent 
 				color          : white 
 				display        : block 
 				font-size      : 16px 
+				font-weight    : 700
 				line-height    : 1em 
+				padding        : 21px 0 12px 
 				text-decoration: none 
 				text-transform : uppercase
-				+transition( all 500ms cubic-bezier(.5,.5,.5,1.5) )
 			//hover u active li 
 			&:hover , &.current-menu-item , &.current_page_item , &.current-menu-ancestor , &.current-menu-parent
 				a
-					border-bottom  : 2px solid white
+					border-bottom: 2px solid $theme_yellow
+					color        : $theme_yellow
 			//hover submenu
 			&:hover 
 				ul.sub-menu
@@ -783,8 +816,6 @@ figure
 		max-height: 135px 
 
 //SECCIÓN DE MAPA
-.pageContact__map
-
 #canvas-map
 	height: 400px 
 	width : 100%

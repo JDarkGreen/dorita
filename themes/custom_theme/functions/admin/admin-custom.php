@@ -9,7 +9,7 @@
 
 function my_custom_login_page_css()
 {
-	wp_enqueue_style( 'login-css', THEMEROOT . "/assets/styles/build/admin/login.css" );
+	wp_enqueue_style( 'login-css', THEMEROOT . "/admin/css/login.css" );
 }
 add_action('login_head', 'my_custom_login_page_css');
 

@@ -1,41 +1,51 @@
 /*
-Theme Name: PARACAS SUNSET Tema Wordpresss
-Theme URI: https://
-Author: Ingenioart
-Author URI: https://
-Description:  Una web hecha en wordpress
-Version: 1.2
+Theme Name: La Dorita Website
+Theme URI: 
+Author: IngenioArt - JDarkgreen
+Author URI: 
+Description: TUn página web hecha en Wordpress
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: 
-Text Domain: paracas, hotel , sunset , reservas 
+Text Domain: 
 
 This theme, like WordPress, is licensed under the GPL.
 Use it to make something cool, have fun, and share what you've learned with others.
 */
 
+/**
+ * CARPETA VENDOR O PLUGINS DE TERCEROS
+ *
+**/
+
 /* font awesome */
-@import url("assets/styles/build/font-awesome/css/font-awesome.min.css"); 
+@import url("assets/styles/vendor/font-awesome/css/font-awesome.min.css");
+
 /*bootstrap*/
-@import url("assets/styles/build/bootstrap.min.css"); 
+@import url("assets/styles/vendor/bootstrap.min.css"); 
 
 /* owl carousel */
-@import url("assets/styles/build/owl.carousel.css"); 
+@import url("assets/styles/vendor/owl.carousel.css"); 
 
 /* fancybox */
-@import url("assets/styles/build/fancybox/jquery.fancybox.css"); 
+@import url("assets/styles/vendor/fancybox/jquery.fancybox.css"); 
 
 /* parsley */
-@import url("assets/styles/build/parsley.css"); 
+@import url("assets/styles/vendor/parsley.css"); 
 
 /* rev slider */
-@import url("assets/styles/build/revslider.css"); 
+@import url("assets/styles/vendor/revslider.css"); 
 
 /* slidebars */
-@import url("assets/styles/build/slidebars.min.css"); 
+@import url("assets/styles/vendor/slidebars.min.css"); 
 
 /* slick carousel */
-@import url("assets/styles/build/slick/slick.css"); 
+@import url("assets/styles/vendor/slick/slick.css"); 
+
+/**
+ * CARPETA COMPILADO ARCHIVOS PROPIOS 
+ *
+**/
 
 /* archivo master */
 @import url("assets/styles/build/master.css");

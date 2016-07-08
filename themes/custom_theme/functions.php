@@ -5,7 +5,7 @@
 /***********************************************************************************************/
 define('THEMEROOT', get_stylesheet_directory_uri());
 define('IMAGES', THEMEROOT.'/assets/images');
-define('LANG', 'tributary-framework');
+define('LANG', 'this-theme-framework');
 
 /***********************************************************************************************/
 /* Cargar archivos JS */
