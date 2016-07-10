@@ -72,7 +72,7 @@ function theme_taxonomy_edit_custom_fields( $term  ) {
 	$t_id      = $term->term_id; // Obtener el ID del término que está editando
 	$term_meta = get_option( "taxonomy_$t_id" ); // Hacer el chequeo 
     
-    var_dump($term_meta);
+    #var_dump($term_meta);
    
 ?>  
   
