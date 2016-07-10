@@ -65,7 +65,11 @@ function load_admin_custom_enqueue() {
 	wp_enqueue_script('upload-banner-page', THEMEROOT . '/admin/js/media-lib-banner.js', array('jquery'), '', true);  
 	
 	//upload gallery a todas la paginas
-	wp_enqueue_script('upload-gallery', THEMEROOT . '/admin/js/metabox-gallery.js', array('jquery'), '', true);
+	wp_enqueue_script('upload-gallery', THEMEROOT . '/admin/js/metabox-gallery.js', array('jquery'), '', true);	
+
+	//cargar color a esta taxonomía
+	wp_enqueue_style( 'wp-color-picker' );
+	wp_enqueue_script('upload-color', THEMEROOT . '/admin/js/color-for-taxonomy.js', array('jquery' , 'wp-color-picker' ), '', true);
 
 }
 

@@ -53,15 +53,18 @@ var j = jQuery.noConflict();
 	      	j('.js-link_banner').slideUp();
     	});
 
-		//SECCIÓN SUBIR IMAGENES A TAXONOMÍAS
-	    if( j(".js-add-img-tax").length ){ 
-	    	var btn_add_img_tax = j(".js-add-img-tax");
+
+		/*************************************************************************
+		* SECCIÓN SUBIR IMAGENES A TÉRMINOS DE TAXONOMÍAS
+		**************************************************************************/
+	    if( j("#js-add-img-tax").length ){ 
+	    	var btn_add_img_tax = j("#js-add-img-tax");
 
 	    	btn_add_img_tax.on('click', function(e){
 	    		//Prevenir accion por defecto
 	    		e.preventDefault();
 			
-				var input_img_tax = j(this).attr('data-input');
+				//var input_img_tax = j(this).attr('data-input');
 				var Uploader;
 
 				if ( Uploader) {
@@ -79,10 +82,23 @@ var j = jQuery.noConflict();
 				Uploader.on('select', function() {
 					attachment = Uploader.state().get('selection').first().toJSON();
 
-					var campo_field = j("input[name='"+input_img_tax + "']");
-					console.log(campo_field);
+					var campo_field = j("input[name='term_meta[theme_tax_img]");
+					//console.log(campo_field);
 	          		//setea el campo
 	          		campo_field.val(attachment.url);
+
+	          		//Agregamos una imagen de vista previa
+	          		var vistaPrevia = "<a class='js-add-img-tax'>";
+	          		vistaPrevia += "<img src='"+attachment.url+"' style='width:150px; height:150px;' />";
+	          		vistaPrevia += "</a>";
+
+	          		//al contenedor de vista previa
+	          		btn_add_img_tax.parent()
+	          		.find(".container-preview").html("").html( vistaPrevia );
+
+	          		//cambiar texto de boton
+	          		btn_add_img_tax.html( "Cambiar Imagen" );
+
 	          	});
 
 	        	// Open the uploader dialog
@@ -90,8 +106,25 @@ var j = jQuery.noConflict();
 	    	});
 	    }
 
-	    //SUBIR IMAGEN CON WIDGET 
-	    if( j(".upload-img-btn-widget").length ){ 
+	    /**
+	    * Botón Remover Imagen Subida a termino de taxonomía
+	    */
+	    j("#js-remove-img-tax").on('click',function(e){
+	    	//remover funcion por defecto
+	    	e.preventDefault(); 
+	    	//Remover el valor actual del campo oculto
+	    	j("#theme_tax_img").val("");
+	    	//Eliminar la imagen preview 
+	    	j(this).parent().find(".container-preview").html("");
+	    	//Cambiar texto de botón de agregado
+	    	j("#js-add-img-tax").html( "Agregar Imagen" );
+	    });
+
+
+	    /************************************************************************
+	    * SUBIR LA IMAGEN CON UN WIDGET
+	    ************************************************************************/
+	    /*if( j(".upload-img-btn-widget").length ){ 
 	    	j(document).on( "click", ".upload-img-btn-widget", function ( e ){
 	    		//Prevenir accion por defecto
 	    		e.preventDefault();
@@ -121,7 +154,7 @@ var j = jQuery.noConflict();
 	        	// Open the uploader dialog
 	        	Uploader.open();
 	    	});
-	    }	    
+	    }	*/    
 
 
 	/*---------------------------- LIMITE ------------------------------*/

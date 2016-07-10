@@ -4,7 +4,7 @@
 
 function create_post_type(){
 
-	/*|>>>>>>>>>>>>>>>>>>>> BANNERS  <<<<<<<<<<<<<<<<<<<<|*/
+	/*|>>>>>>>>>>>>>>>>>>>> SLIDER HOME  <<<<<<<<<<<<<<<<<<<<|*/
 	
 	$labels = array(
 		'name'               => __('Slider Home'),
@@ -125,18 +125,18 @@ function create_post_type(){
 		'menu_icon'   => 'dashicons-video-alt',
 	);
 
-	/*|>>>>>>>>>>>>>>>>>>>> STAFF  <<<<<<<<<<<<<<<<<<<<|*/
+	/*|>>>>>>>>>>>>>>>>>>>> PRODUCTOS  <<<<<<<<<<<<<<<<<<<<|*/
 	
 	$labels6 = array(
-		'name'               => __('Staff'),
-		'singular_name'      => __('Miembro'),
-		'add_new'            => __('Nuevo Miembro'),
-		'add_new_item'       => __('Agregar nuevo Miembro'),
-		'edit_item'          => __('Editar Miembro'),
-		'view_item'          => __('Ver Miembro'),
-		'search_items'       => __('Buscar Miembro'),
-		'not_found'          => __('Miembro no encontrado'),
-		'not_found_in_trash' => __('Miembro no encontrado en la papelera'),
+		'name'               => __('Productos La Dorita'),
+		'singular_name'      => __('Producto'),
+		'add_new'            => __('Nuevo Producto'),
+		'add_new_item'       => __('Agregar nuevo Producto'),
+		'edit_item'          => __('Editar Producto'),
+		'view_item'          => __('Ver Producto'),
+		'search_items'       => __('Buscar Producto'),
+		'not_found'          => __('Producto no encontrado'),
+		'not_found_in_trash' => __('Producto no encontrado en la papelera'),
 	);
 
 	$args6 = array(
@@ -145,15 +145,15 @@ function create_post_type(){
 		'public'      => true,
 		'hierachical' => false,
 		'supports'    => array('title','editor','excerpt','custom-fields','thumbnail','page-attributes'),
-		'taxonomies'  => array('post-tag','category'),
-		'menu_icon'   => 'dashicons-groups',
+		'taxonomies'  => array('post-tag'),
+		'menu_icon'   => 'dashicons-cart',
 	);
 
 	/*|>>>>>>>>>>>>>>>>>>>> REGISTRAR  <<<<<<<<<<<<<<<<<<<<|*/
 	register_post_type( 'slider-home' , $args  );
 	register_post_type( 'servicio' , $args2 );
 	register_post_type( 'cliente' , $args3 );
-	register_post_type( 'miembro' , $args6 );
+	register_post_type( 'producto-dorita' , $args6 );
 	//register_post_type( 'galery-images' , $args4 );
 	//register_post_type( 'galery-videos' , $args5 );
 
