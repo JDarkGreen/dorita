@@ -16,16 +16,28 @@
 <!-- Contenedor Principal -->
 <main class="">
 	
-	<!-- Primera Seccion de descripcion -->
-	<section class="pageNosotros__description">
-		<div class="container">
-			<div class="row">
+	<!-- Contenedor Contenido -->
+	<section class="pageWrapper__content pageNosotros">
+		
+		<!-- Título de Página --> <h2 class="pageSectionCommon__title pageSectionCommon__title--orange text-uppercase"> <?= __(  $post->post_title , LANG ); ?> </h2>
 
-				<!-- Carousel Nosotros -->
-				<div class="col-xs-12 col-md-6">
+		<!-- Subtítulo de Página --> 
+		<h3 class="pageSectionCommon__subtitle"> 
+			<?= !empty($post->post_excerpt) ? $post->post_excerpt : "Nuestra Historia"; ?>
+		</h3> <!-- /.pageSectionCommon__subtitle -->
 
-					<!-- Contenedor de Galería [ SERVICIOS ] -->
-					<!-- Wrapper para sliders -->
+		<!-- Seccion de Contenido y galería -->
+		<section class="row">
+			<!-- Contenido -->
+			<div class="col-xs-12 col-md-6">
+				<?= !empty($post->post_content) ? apply_filters("the_content" , $post->post_content  ) : "" ; ?>
+			</div> <!-- /.col-xs-12 col-md-6 -->
+			<!-- Galería -->
+			<div class="col-xs-12 col-md-6">
+
+				<!-- Contenedor Relativo -->
+				<section class="relative">
+					<!-- Contenedor de Galería [ ] -->
 					<?php  
 						/*
 						*  Attributos disponibles 
@@ -61,104 +73,23 @@
 					</div> <!-- /.section__single_gallery -->
 
 					<!-- Flechas de Carousel Ocultar en mobile -->
-					<div class="text-xs-center relative hidden-xs-down">
+					<div class="text-xs-center hidden-xs-down">
 						<!-- Flecha Izquierda -->
 						<a href="#" id="" class="arrow__common-slider js-carousel-prev arrowCarouselNosotros-prev" data-slider="carousel-nosotros">
-							<i class="fa fa-chevron-left" aria-hidden="true"></i>
+							<i class="fa fa-arrow-left" aria-hidden="true"></i>
 						</a>							
 						<!-- Flecha Derecha -->
 						<a href="#" id="" class="arrow__common-slider js-carousel-next arrowCarouselNosotros-next" data-slider="carousel-nosotros">
-							<i class="fa fa-chevron-right" aria-hidden="true"></i>
+							<i class="fa fa-arrow-right" aria-hidden="true"></i>
 						</a>
-					</div> <!-- /.text-xs-center relative -->
+					</div> <!-- /.text-xs-center  -->	
 
-				</div> <!-- /.col-xs-12 col-md-6 -->
-				
-				<!-- Información -->
-				<div class="col-xs-12 col-md-6">
-					<section class="text-xs-center">
+				</section> <!-- /.relative -->	
 
-						<!-- Titulo de Sección -->
-						<h2 class="pageSectionCommon__title text-uppercase">
-							<?php _e( "quienes somos" , LANG ); ?>
-						</h2> <!-- /.pageSectionCommon__title -->
+			</div> <!-- /.col-xs-12 col-md-6 -->			
+		</section> <!-- /.row -->
 
-						<!-- Contenido 1 Descripcion -->
-						<div class="pageNosotros__content"> 
-							<?= apply_filters('the_content' , $post->post_content ); ?>
-						</div> <!-- /.text-justify -->
-
-					</section> <!-- /section -->
-				</div> <!-- /.col-xs-12 col-md-6 -->
-				
-			</div> <!-- /.row -->
-
-		</div> <!-- /.container -->
-	</section> <!-- /.pageNosotros__description -->	
-
-	<!-- Sefunda Sección Aptitudes -->
-	<section class="pageNosotros__aptitudes">
-		<div class="container">
-
-			<div class="row text-justify">
-				
-				<!-- MISIÓN -->
-				<div class="col-xs-12 col-md-6">
-					<?php if( isset($theme_mod['text_mision']) && !empty($theme_mod['text_mision']) ) : ?>
-						<div class="row">
-							<!-- Imagen -->
-							<div class="col-xs-12 col-md-4">
-								<figure class="">
-									<?php  
-										$imagen_mision = isset($theme_mod['image_mision']) && !empty($theme_mod['image_mision']) ? $theme_mod['image_mision'] : IMAGES . '/nosotros/imagen_mision.jpg';
-									?>
-									<img src="<?= $imagen_mision; ?>" alt="tributary-mision-agencia-pecuarias" class="img-fluid" />
-								</figure> <!-- /. -->
-
-								<!-- Separación en mobile --> <p class="hidden-sm-up"></p>
-							</div> <!-- /.col-xs-4 -->
-							<!-- Texto -->
-							<div class="col-xs-12 col-md-8">
-								<!-- Titulo --> <h3 class="pageSectionCommon__title text-uppercase"> <?php _e( "misión", LANG ); ?></h3>
-								<!-- Texto -->
-								<?= apply_filters('the_content' , $theme_mod['text_mision'] ); ?>
-							</div> <!-- /.col-xs-8 -->
-
-							<!-- Separación en mobile --> <p class="hidden-sm-up"></p>
-							
-						</div> <!-- /.row -->
-					<?php endif; ?>
-				</div> <!-- /.col-xs-6 -->		
-
-				<!-- VISIÓN -->
-				<div class="col-xs-12 col-md-6">
-					<?php if( isset($theme_mod['text_vision']) && !empty($theme_mod['text_vision']) ) : ?>
-						<div class="row">
-							<!-- Imagen -->
-							<div class="col-xs-12 col-md-4">
-								<figure class="">
-									<?php  
-										$imagen_vision = isset($theme_mod['image_vision']) && !empty($theme_mod['image_vision']) ? $theme_mod['image_vision'] : IMAGES . '/nosotros/imagen_vision.jpg';
-									?>
-									<img src="<?= $imagen_vision; ?>" alt="tributary-vision-agencia-pecuarias" class="img-fluid" />		
-								</figure> <!-- /. -->
-								
-								<!-- Separación en mobile --> <p class="hidden-sm-up"></p>
-							</div> <!-- /.col-xs-4 -->
-							<!-- Texto -->
-							<div class="col-xs-12 col-md-8">
-								<!-- Titulo --> <h3 class="pageSectionCommon__title text-uppercase"> <?php _e( "visión", LANG ); ?></h3>
-								<!-- Texto -->
-								<?= apply_filters('the_content' , $theme_mod['text_vision'] ); ?>
-							</div> <!-- /.col-xs-8 -->
-							
-						</div> <!-- /.row -->
-					<?php endif; ?>
-				</div> <!-- /.col-xs-6 -->
-
-			</div> <!-- /.row -->
-		</div> <!-- /.container -->
-	</section> <!-- /.pageNosotros__aptitudes -->
+	</section> <!-- /.pageWrapper__content -->
 
 </main> <!-- /.pageWrapper -->
 

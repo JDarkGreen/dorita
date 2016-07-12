@@ -155,19 +155,18 @@ body,html
 //Flechas de Slider en común
 .arrow__common-slider
 	align-items    : center 
-	background     : gray 
+	background     : $theme_orange_dark
 	display        : flex 
-	height         : 40px 
+	height         : 53px 
 	justify-content: center 
 	margin         : 0 auto
 	position       : absolute
 	text-decoration: none
-	top            : 50%
-	width          : 40px 
+	width          : 57px 
 	z-index        : 999
 	i 
 		color      : white 
-		font-size  : 25px
+		font-size  : 14px
 		position   : relative 
 
 	//hover 
@@ -305,17 +304,20 @@ body,html
 //REDES SOCIALES
 //+Redes Sociales - ul
 .social-links
-	display        : inline-block
 	list-style-type: none 
 	margin         : 0
 	padding        : 0 
 	li 
 		display: inline-block
-		padding: 0 8px
+		padding: 0 4px
 		a 
-			color    : white 
-			display  : block
-			font-size: 20px
+			+border-radius( 50% )
+			background: white 
+			color     : $theme_orange_dark
+			display   : block
+			font-size : 20px
+			height    : 30px
+			width     : 30px
 			//Hover
 			&:hover 
 				animation: expand 800ms ease infinite 
@@ -366,6 +368,7 @@ body,html
 		transform          : translateZ(0) scale(1.0, 1.0) !important
 		figure  
 			background: black 
+			margin    : 0 auto 
 		img 
 			transform-style: initial !important 
 
@@ -475,6 +478,18 @@ body,html
 .sectionBackgroundFruts
 	background: url('../../images/backgrounds/fondo_web_la_dorita_frutas_pulpas_lima_peru.jpg') no-repeat 
 
+/*[ $TEXTOS ] */
+
+//Texto Web
+.textWeb
+	color      : $theme_orange
+	font-family: "Raleway", sans-serif
+	font-size  : 20px
+	//hover
+	&:hover 
+		+animation( heartbeat 1s )  
+		color          : $theme_orange
+		text-decoration: none 
 
 /***************************************************************************************/
 /**--  HEADER   ----------------------------------------------------------------------**/
@@ -484,8 +499,13 @@ body,html
 .mainHeader
 	// Logo 
 	.logo 
-		margin   : -103px 0 0
-		max-width: 196px
+		position: relative
+		width   : 196px
+		//link interno
+		a 
+			bottom  : -35px 
+			position: absolute
+			z-index : 999
 
 /*[ $BARRA DE INFORMACION ] */
 .mainHeader__info
@@ -525,7 +545,7 @@ body,html
 .mainNavigation
 	background-image : url("../../images/backgrounds/fondo_menu.jpg") 
 	background-repeat: no-repeat
-	background-size  : contain
+	background-size  : cover
 	font-family      : 'Raleway', sans-serif
 	ul
 		list-style-type: none 
@@ -589,9 +609,17 @@ body,html
 /**--  WRAPPER GENERAL ---------------------------------------------------------------**/
 /***************************************************************************************/
 
-//Contenedor General 
-.pageWrapper
-	margin: 65px 0
+//Contenedor General Contenido de Páginas
+.pageWrapper__content
+	+box-shadow( 1px 1px 9px )
+	background : white
+	font-family: "Raleway" , sans-serif
+	margin     : -49px auto 0
+	max-width  : 975px
+	padding    : 36px 38px
+	position   : relative
+	width      : 100%
+	z-index    : 999
 
 /***************************************************************************************/
 /**--  PAGINA INICIO  ----------------------------------------------------------------**/
@@ -715,7 +743,7 @@ body,html
 
 //SECCION FACEBOOK
 .pageInicio__facebook
-	padding: 0 10%
+	padding: 0 5%
 	
 
 
@@ -727,15 +755,15 @@ body,html
 /***************************************************************************************/
 
 // SECCIÓN DESCRIPCIÓN
-.pageNosotros__description
-	background: $theme_gray_claro
-	padding   : 80px 0
+.pageNosotros
 
 	/* Sobreescribiendo las flechas de carousel */
 	.arrowCarouselNosotros-prev
-		left: 42%
+		bottom: 0
+		right : 9%
 	.arrowCarouselNosotros-next
-		left: 50%
+		bottom: 0
+		right : 0
 
 //SECCIÓN APTITUDES
 .pageNosotros__aptitudes
@@ -835,6 +863,7 @@ body,html
 	li 
 		display  : flex
 		flex-wrap: wrap
+		margin   : 0 auto 5px 
 		//Icono
 		i 
 			height: 20px 
@@ -883,13 +912,24 @@ body,html
 
 //SECCIÓN
 .mainFooter
-	color      : white
-	font-family: "Roboto Condensed", sans-serif
+	background     : url("../../images/backgrounds/footer_la_dorita_frutas_pulpas_lima_peru.png") no-repeat
+	background-size: cover 
+	color          : white
+	font-family    : "Raleway", sans-serif
+	height         : 303px 
+	margin         : -80px auto 0
+	padding        : 129px 0 0 0
+
+//Logo
+.mainFooter__logo
+	color      : white 
+	font-family: "Lobster",cursive
+
 //Subtítulos 
 .mainFooter__subtitle
-	font-size  : 18px 
-	font-weight: 700 
-	margin     : 0 auto 20px 
+	font-size  : 15px 
+	font-weight: 600 
+	margin     : 0 auto 15px 
 /* Lista de Datos */
 .mainFooter__list-data
 	list-style-type: none 
@@ -898,6 +938,7 @@ body,html
 	li 
 		display  : flex
 		flex-wrap: wrap
+		margin   : 0 auto 5px 
 		//Icono
 		i 
 			height: 20px 
@@ -911,15 +952,16 @@ body,html
 /* Item de Footer contiene informaciones */
 .mainFooter__item
 	border-right: 2px solid rgba( 255,255,255 , .4 )
-	height      : 160px 
+	//Parrafos
+	p 
+		font-size: 14px 
+		margin   : 0 
 
 //++Seccion de Informacion
-.mainFooter__information
-	background: $theme_guinda
-	padding   : 34px 0 24px 
+//.mainFooter__information
+
 //++Seccion de Desarrollo
 .mainFooter__develop
-	background: $theme_blue
 	font-size : 13px 
 	padding   : 5px 0
 	/* Link */

@@ -249,7 +249,7 @@ function theme_customize_register($wp_customize) {
 	));
 	
 	$wp_customize->add_control('theme_custom_settings[contact_cel]', array(
-		'label'    => __('Celular: ', LANG),
+		'label'    => __('Escribe el o los números de celular [ NOTA: SEPARADOS POR COMAS ]', LANG),
 		'section'  => 'theme_contact_cel',
 		'settings' => 'theme_custom_settings[contact_cel]',
 		'type'     => 'text'
@@ -392,6 +392,41 @@ function theme_customize_register($wp_customize) {
 		'section'  => 'theme_widget_nosotros',
 		'settings' => 'theme_custom_settings[image_extra_data_nosotros]',
 	)));
+
+	/*|-----------------------------------------------------------------------|*/
+	/*|-- SECCION FOOTER INFORMACIÓN  --|*/
+	/*|-----------------------------------------------------------------------|*/
+	$wp_customize->add_section('theme_footer', array(
+		'title'       => __('Sección Footer Info', LANG),
+		'description' => __('Sección Footer Info', LANG),
+		'priority'    => 40
+	));
+	
+	//título
+	$wp_customize->add_setting('theme_custom_settings[title_info_footer]', array(
+		'default' => '',
+		'type' => 'theme_mod'
+	));
+	
+	$wp_customize->add_control('theme_custom_settings[title_info_footer]', array(
+		'label'    => __('Título Información en el Footer: ', LANG),
+		'section'  => 'theme_footer',
+		'settings' => 'theme_custom_settings[title_info_footer]',
+		'type'     => 'textarea'
+	));	
+
+	//textarea
+	$wp_customize->add_setting('theme_custom_settings[info_footer]', array(
+		'default' => '',
+		'type' => 'theme_mod'
+	));
+	
+	$wp_customize->add_control('theme_custom_settings[info_footer]', array(
+		'label'    => __('Información en el Footer: ', LANG),
+		'section'  => 'theme_footer',
+		'settings' => 'theme_custom_settings[info_footer]',
+		'type'     => 'textarea'
+	));
 	
 
 
