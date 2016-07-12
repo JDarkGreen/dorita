@@ -1,6 +1,4 @@
-<?php  
-
-/* Archivo que solo se encargara de cargas los scripts del tema 
+<?php  /* Archivo que solo se encargará de cargas los scripts del tema 
 	http://www.ey.com/PE/es/Home
 */
 
@@ -45,7 +43,7 @@ function load_custom_scripts()
 	wp_enqueue_script('slidebars', THEMEROOT . '/assets/js/vendor/slidebars.min.js', array('jquery'), '0.10.3', true);	 	 
 
 	//custom script
-	wp_enqueue_script('custom_script', THEMEROOT . '/assets/js/build/script.min.js', array('jquery'), false, true);
+	wp_enqueue_script('custom_script', THEMEROOT . '/assets/js/source/script-compiled.js', array('jquery'), '1.0' , true );
 
 }
 

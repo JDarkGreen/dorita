@@ -3,7 +3,7 @@
 <?php $theme_mod = get_theme_mod('theme_custom_settings'); ?>
 	
 	<!-- Footer -->
-	<footer class="mainFooter">
+	<?php /*<footer class="mainFooter">
 
 		<!-- Seccion de Informacion  -->
 		<section class="mainFooter__information">
@@ -125,6 +125,8 @@
 	</footer><!-- /.mainFooter -->
 
 	</div> <!-- /#sb-slidebar -->
+
+	*/ ?>
 
 	<?php wp_footer(); ?>
 

@@ -351,10 +351,10 @@ function theme_customize_register($wp_customize) {
 	/*|-----------------------------------------------------------------------|*/
 	/*|-- SECCION NOSOTROS PORTADA  --|*/
 	/*|-----------------------------------------------------------------------|*/
-	/*$wp_customize->add_section('theme_widget_nosotros', array(
-		'title' => __('Sección Nosotros', LANG),
+	$wp_customize->add_section('theme_widget_nosotros', array(
+		'title'       => __('Sección Nosotros', LANG),
 		'description' => __('Sección Nosotros', LANG),
-		'priority' => 40
+		'priority'    => 40
 	));
 	
 	//textarea
@@ -364,7 +364,7 @@ function theme_customize_register($wp_customize) {
 	));
 	
 	$wp_customize->add_control('theme_custom_settings[widget_nosotros]', array(
-		'label'    => __('Texto en Sección Bienvenidos en el Home [ Nota SI ESTA ACTIVADO EL PLUGIN QTRANSLATE ] agregar [:es] antes de texto en español y para traducir este texto añade [:etiqueta_idioma] antes del texto por ejemplo [:en] para Inglés: ', LANG),
+		'label'    => __('Texto en Sección Bienvenidos en el Home', LANG),
 		'section'  => 'theme_widget_nosotros',
 		'settings' => 'theme_custom_settings[widget_nosotros]',
 		'type'     => 'textarea'
@@ -379,12 +379,19 @@ function theme_customize_register($wp_customize) {
 		'label'    => __('Imagen Nosotros', LANG),
 		'section'  => 'theme_widget_nosotros',
 		'settings' => 'theme_custom_settings[image_nosotros]',
+	)));	
+
+	//imagen Slogan Extradato
+	$wp_customize->add_setting('theme_custom_settings[image_extra_data_nosotros]',array(
+		'default' => '',
+		'type'    => 'theme_mod'
+	));
+
+	$wp_customize->add_control(new WP_Customize_Upload_Control($wp_customize,'image_extra_data_nosotros', array(
+		'label'    => __('Imagen Extra - Información: Distribución', LANG),
+		'section'  => 'theme_widget_nosotros',
+		'settings' => 'theme_custom_settings[image_extra_data_nosotros]',
 	)));
-
-	*/
-
-
-
 	
 
 

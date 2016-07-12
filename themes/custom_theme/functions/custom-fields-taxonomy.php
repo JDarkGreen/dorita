@@ -12,60 +12,141 @@ $taxonomies[0] = 'servicio_category'; //categoría de servicio
 $taxonomies[1] = 'producto_category'; //categoría de producto
 
 
-function theme_taxonomy_add_custom_fields(){
-?>
+/**
+* Funciones para hacer la llamada callback
+**/
 
-<!-- ##########################  -->
-<!-- CAMPO PERSONALIZADO IMAGEN  -->
-<!-- ##########################  -->
-<tr class="form-field">  
-    <th scope="row" valign="top">  
-        <label for="theme_tax_img"><?php _e('Agregar Imagen Destacada'); ?></label>  
-    </th>  
-    <td>  
-        <input type="text" id="theme_tax_img" name="term_meta[theme_tax_img]" size="25" style="width:60%;" value="" />
+/** AGREGAR NUMERO DE ORDEN **/
+function theme_add_num_order( $value_number = 1 )
+{
+    ob_start(); //Encienda el búfer de salida ?>
+    <tr class="form-field">  
+        <th scope="row" valign="top">  
+            <label for="term_meta[theme_tax_order]"><?php _e('Asignación Prioridad - Orden: '); ?></label> 
+        </th>   <!-- /.scope="row" -->
+        <td>
+            <input type="number" name="term_meta[theme_tax_order]" value="<?= $value_number; ?>" min="1" style="max-width: 100px;" />
+            <p class="description"> <?php _e( "Determina el orden de este termino: 1 = mayor prioridad , 2 , 3 etc", LANG ); ?></p>
+            <!-- Separación--> <br />
+        </td>
+    </tr> <!-- /.form-field -->
+    <?php
+        $output_function_order = ob_get_contents(); #Devolver el contenido del búfer de salida
+        ob_clean(); //Esta función desecha el contenido del búfer de salida. 
+        return $output_function_order;
+}
 
-        <!-- Separación --> <p></p>
-        <!-- Contenedor Agregar Imagen Previa -->
-        <div class="container-preview"> </div> 
-        
-        <!-- Separación --> <p></p>
-        <!-- Botón agregar imágen --> 
-        <button id="js-add-img-tax" class="button button-primary" data-input="term_meta[theme_tax_img_<?= $t_id; ?>]" >
-            <?php _e( 'Agregar Imagen' , LANG ); ?>
-        </button> 
+/** CAMPO PERSONALIZADO TEXAREA EXTRA INFO  **/
+function theme_add_extra_info( $extra_info = "" )
+{
+    ob_start(); //Encienda el búfer de salida ?>
+    <tr class="form-field">  
+        <th scope="row" valign="top">  
+            <label for="term_meta[theme_tax_extra_info]"><?php _e('Meta Extra Información: '); ?></label> 
+        </th>   <!-- /.scope="row" -->
+        <td>
+            <textarea name="term_meta[theme_tax_extra_info]" style="width:320px; height: 100px; max-height:  100px;"> <?= $extra_info; ?> </textarea>
+            <p class="description"> <?php _e( "Escribe una información adicional para éste término", LANG ); ?></p>
+            <!-- Separación--> <br />
+        </td>
+    </tr> <!-- /.form-field -->
+    <?php
+        $output_function = ob_get_contents(); #Devolver el contenido del búfer de salida
+        ob_clean(); //Esta función desecha el contenido del búfer de salida. 
+        return $output_function;
+}
 
-        <!-- Botón remover Imagen Oculto -->
-        <button id="js-remove-img-tax" class="button button-primary">
-            <?php _e( 'Remover Imagen' , LANG ); ?>
-        </button> 
+/** CAMPO PERSONALIZADO IMAGEN  **/
+function theme_add_image( $value_image = "" )
+{
+    ob_start(); //Encienda el búfer de salida ?>
+    <tr class="form-field">  
+        <th scope="row" valign="top">  
+            <label for="term_meta[theme_tax_img]"><?php _e('Agregar Imagen Destacada'); ?></label>  
+        </th>  
+        <td>  
+            <input type="hidden" id="theme_tax_img" name="term_meta[theme_tax_img]" size="25" style="width:60%;" value="<?= $value_image; ?>" />
 
-        <!-- Separación --> <p></p>
+            <!-- Separación --> <p></p>
+            <!-- Contenedor Agregar Imagen Previa -->
+            <div class="container-preview">
+                <?php if( !empty($value_image) && !is_null($value_image) ) : ?>
+                <img src="<?= $value_image; ?>" style="width:150px; height:150px;" />
+                <?php endif ?>
+            </div> 
+            
+            <!-- Separación --> <p></p>
+            <!-- Botón agregar imágen --> 
+            <button id="js-add-img-tax" class="button button-primary" data-input="term_meta[theme_tax_img_<?= $t_id; ?>]" >
+                <?php empty($value_image) || is_null($value_image) ? _e( 'Agregar Imagen' , LANG ) : _e( 'Cambiar Imagen' , LANG ) ; ?>
+            </button> 
 
-        <!-- Descripcion -->
-        <p class="description"><?php _e('Subir una imagen destacada medida: 980x659'); ?></p>
-        <br/>  
-    </td>  
-</tr> 
+            <!-- Botón remover Imagen Oculto -->
+            <button id="js-remove-img-tax" class="button button-primary">
+                <?php _e( 'Remover Imagen' , LANG ); ?>
+            </button> 
 
-<!-- ###################################  -->
-<!-- CAMPO PERSONALIZADO COLOR TAXONOMIA  -->
-<!-- ###################################  --> 
-<tr class="form-field">  
-    <th scope="row" valign="top">  
-        <label for="theme_tax_color"><?php _e('Asignar Color Destacado: '); ?></label> 
-    </th>   <!-- /.scope="row" -->
-    <td>
-        <input type="text" class="js-add-theme-color" name="term_meta[theme_tax_color]" value="#000000" />
-        <p class="description"> <?php _e( "Por defecto Negro", LANG ); ?></p>
+            <!-- Separación --> <p></p>
 
-        <!-- Separación--> <br />
-    </td>
-</tr> <!-- /.form-field -->
+            <!-- Descripcion -->
+            <p class="description"><?php _e('Subir una imagen destacada medida: 198x172'); ?></p>
+            <br/>  
+        </td>  
+    </tr> 
+    <?php
+        $output_function = ob_get_contents(); #Devolver el contenido del búfer de salida
+        ob_clean(); //Esta función desecha el contenido del búfer de salida. 
+        return $output_function;
+}
+
+/** CAMPO PERSONALIZADO COLOR TAXONOMIA  **/
+function theme_add_color( $value_color = "#000000" )
+{
+    ob_start(); //Encienda el búfer de salida ?>
+    <tr class="form-field">  
+        <th scope="row" valign="top">  
+            <label for="term_meta[theme_tax_color]"><?php _e('Asignar Color Destacado: '); ?></label> 
+        </th>   <!-- /.scope="row" -->
+        <td>
+            <input type="text" class="js-add-theme-color" name="term_meta[theme_tax_color]" value="<?= $value_color; ?>" />
+            <p class="description"> <?php _e( "Por defecto Negro", LANG ); ?></p>
+
+            <!-- Separación--> <br />
+        </td>
+    </tr> <!-- /.form-field -->
+    <?php
+        $output_function = ob_get_contents(); #Devolver el contenido del búfer de salida
+        ob_clean(); //Esta función desecha el contenido del búfer de salida. 
+        return $output_function;
+}
 
 
-<?php
-} // end of function
+/**---------------------------------------------------------------------------**/
+
+function theme_taxonomy_add_custom_fields()
+{
+    /**
+    *  CAMPO PERSONALIZADO ORDEN
+    **/
+    echo theme_add_num_order();
+
+    /**
+    *  CAMPO PERSONALIZADO TEXAREA EXTRA INFO
+    **/
+    echo theme_add_extra_info();
+
+    /**
+    * CAMPO PERSONALIZADO IMAGEN
+    **/
+    echo theme_add_image();
+
+    /**
+    * CAMPO PERSONALIZADO COLOR TAXONOMIA
+    **/
+    echo theme_add_color();
+
+}
+
 
 function theme_taxonomy_edit_custom_fields( $term  ) {  
    // Compruebe para el meta taxonomía existente para el término que está editando 
@@ -73,74 +154,32 @@ function theme_taxonomy_edit_custom_fields( $term  ) {
 	$term_meta = get_option( "taxonomy_$t_id" ); // Hacer el chequeo 
     
     #var_dump($term_meta);
-   
+
+    /**
+    *  CAMPO PERSONALIZADO ORDEN
+    **/
+    $value_order = $term_meta['theme_tax_order'];
+    echo theme_add_num_order( $value_order );
+
+    /**
+    *  CAMPO PERSONALIZADO TEXAREA EXTRA INFO
+    **/
+    $value_extra_info = $term_meta['theme_tax_extra_info'];
+    echo theme_add_extra_info( $value_extra_info );
+
+    /**
+    * CAMPO PERSONALIZADO IMAGEN
+    **/
+    $value_img = $term_meta['theme_tax_img'];
+    echo theme_add_image( $value_img );
+
+    /**
+    * CAMPO PERSONALIZADO COLOR TAXONOMIA
+    **/
+    $value_color = $term_meta['theme_tax_color'];
+    echo theme_add_color( $value_color );
+
 ?>  
-  
-<!-- ##########################  -->
-<!-- CAMPO PERSONALIZADO IMAGEN  -->
-<!-- ##########################  -->
-<tr class="form-field">  
-    <th scope="row" valign="top">  
-        <label for="term_meta[theme_tax_img]"><?php _e('Agregar Imagen Destacada'); ?></label>  
-    </th>  
-    <td>  
-        <?php 
-            /*** Url de Imagen *****/ 
-            $input_img = $term_meta["theme_tax_img"];
-        ?>
-        <!-- -->
-        <input type="text" id="theme_tax_img" name="term_meta[theme_tax_img]" size="25" style="width:60%;" value="<?= !empty($input_img) ? $input_img : ""; ?>">
-
-        <!-- Separación --> <p></p>
-
-        <!-- Imagen Previa -->
-        <div class="container-preview">
-            <?php if( !empty($input_img ) ) : ?>
-                    <img src="<?= $input_img; ?>" style="width:150px;height:150px;" />
-            <?php else: ?>
-                <p> Archivo no Encontrado Elija nueva ruta </p>
-            <?php endif ?>
-        </div> <!-- /.container-preview  -->
-
-        <!-- Separación --> <p></p>
-
-        <!-- Botón agregar imágen --> 
-        <button id="js-add-img-tax" class="button button-primary" data-input="term_meta[theme_tax_img_<?= $t_id; ?>]" >
-            <?php _e( 'Agregar Imagen' , LANG ); ?>
-        </button> 
-
-        <!-- Botón remover Imagen Oculto -->
-        <button id="js-remove-img-tax" class="button button-primary">
-            <?php _e( 'Remover Imagen' , LANG ); ?>
-        </button> 
-
-        <!-- Separación --> <p></p>
-
-        <p class="description"><?php _e('Subir una imagen destacada medida: 980x659'); ?></p> 
-        <br/> 
-        
-    </td>  
-</tr>  
-
-<!-- ###################################  -->
-<!-- CAMPO PERSONALIZADO COLOR TAXONOMIA  -->
-<!-- ###################################  --> 
-<tr class="form-field">  
-    <th scope="row" valign="top">  
-        <label for="theme_tax_color"><?php _e('Asignar Color Destacado: '); ?></label> 
-    </th>   <!-- /.scope="row" -->
-    <td>
-        <?php /*** Color taxonomía *****/ 
-            $input_color = !empty($term_meta["theme_tax_color"]) ? $term_meta["theme_tax_color"] : "#000000" ;
-        ?>
-        <!-- -->
-        <input type="text" class="js-add-theme-color" name="term_meta[theme_tax_color]" value="<?= $input_color; ?>" />
-        <p class="description"> <?php _e( "Por defecto Negro", LANG ); ?></p>
-
-        <!-- Separación--> <br />
-    </td>
-</tr> <!-- /.form-field -->
-
 
 <?php  
 }  

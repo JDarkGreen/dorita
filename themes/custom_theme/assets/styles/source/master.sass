@@ -37,16 +37,18 @@ $theme_gray_semiclaro: #CDCDCD
 $theme_gray_claro    : #EBE9EE
 $theme_gray_oscuro   : #7F7F81
 $theme_guinda        : #A70032
-$theme_blue          : #003352
 
 // Actualización de Colores
-$theme_green : #0F6800
-$theme_yellow: #FFE700
+$theme_green      : #0F6800
+$theme_yellow     : #FFE700
+$theme_orange     : #FF8300
+$theme_orange_dark: #FF5C14
+$theme_blue       : #25569C
 
 
-$theme_facebook      : #3A5998
-$theme_twitter       : #00ABF1
-$theme_gplus         : #DB4B39
+$theme_facebook   : #3A5998
+$theme_twitter    : #00ABF1
+$theme_gplus      : #DB4B39
 
 
 /***************************************************************************************/
@@ -105,6 +107,14 @@ body,html
 		background-size: 100% 100%
 	100%
 		background-size: 140% 140%
+
+//HEARTHBEAT
++keyframes( heartbeat )
+	0% , 40% 
+		+scale( .75 )
+	20% , 60% , 100%
+		+scale( 1 )
+
 
 /***************************************************************************************/
 /**-------------------------- ANIMACIONES CON CLASES ----------------------------------**/
@@ -219,25 +229,27 @@ body,html
 //+BOTONES
 //++ Botón Ver Más
 .btnCommon__show-more
+	+border-radius( 35px )
 	+box-shadow( inset 0 0 0 0 transparent )
 	+transition( color 1000ms ease-in , box-shadow 750ms ease-in-out )
-	background: $theme_guinda
-	border    : 1px solid transparent
-	color     : white 
-	display   : inline-block 
-	font-size : 14px 
-	margin    : 0
-	overflow  : hidden
-	padding   : 8px 30px 
-	text-align: center 
+	background : $theme_orange
+	border     : 1px solid transparent
+	color      : white 
+	display    : inline-block 
+	font-size  : 14px 
+	font-weight: 700 
+	margin     : 0
+	overflow   : hidden
+	padding    : 5px 30px 
+	text-align : center 
 	//hover y focus
 	&:hover , &:focus
 		color          : white 
 		text-decoration: none 
 	&:hover 
 		+box-shadow( inset 300px 0 0 0 white )
-		border: 1px solid $theme_guinda
-		color : $theme_guinda
+		border: 1px solid $theme_orange
+		color : $theme_orange
 
 //++VARIACION A TRANSPARENTE
 .btnCommon__show-more--transparent
@@ -272,9 +284,17 @@ body,html
 
 //++ Título de seccion de paginas
 .pageSectionCommon__title
-	font-family: "Roboto Condensed" , sans-serif
-	font-size  : 20px
-	font-weight: 600  
+	font-family: 'Fredoka One', cursive
+	font-size  : 30px
+	font-weight: 600 
+	line-height: 1em  
+	margin     : 0 auto 20px 
+//+++ Variación a naranja
+.pageSectionCommon__title--orange
+	color: $theme_orange_dark
+//+++ Variación a azul
+.pageSectionCommon__title--blue
+	color: $theme_blue
 	
 //IMAGEN NOT BLUR ( NO DIFUMINADA )
 .imgNotBlur
@@ -418,27 +438,23 @@ body,html
 
 //Slider de Post y preview de post
 .pagePreview_post
-	ul 
-		list-style-type: none 
-		margin         : 0 
-		padding        : 0 
 	/* Artículos */
 	.articles-item
-		font-family: "Roboto Condensed", sans-serif
-		margin     : 0 auto 28px
+		color      : black 
+		font-family: "Raleway" , sans-serif
 		/* Imagen */
 		figure 
-			margin   : 0 22px 0 0
-			max-width: 187px 
+			margin   : 0 auto 20px
 			overflow : hidden
-			width    : 100%
 			img 
 				+transition( all 3s ease-in )
 		/* Titulo */
 		h3 
-			font-size  : 20px 
-			font-weight: 700
-		/* Parrafp */
+			font-size: 16px
+			height   : 34px
+			margin   : 0 auto 20px 
+			overflow : hidden
+		/* Parrafo */
 		p 
 			color      : $theme_gray
 			line-height: 1.2em 
@@ -452,9 +468,6 @@ body,html
 			figure 
 				img 
 					+scale( 1.2 )
-			/* link del post */
-			a.read-more 
-				animation: expand 2s cubic-bezier(.5,.5,.5,1.5) infinite
 
 /*[ $BACKGROUNDS ] */
 
@@ -620,50 +633,93 @@ body,html
 	left : 2%
 .arrowSliderHome--next 
 	right: 2%
-	
-//SECCIÓN DE SERVICIOS
-.pageInicio__services
-	background: $theme_gray_claro
-	padding   : 39px 0 24px 
 
-/* GaLería de SERVICIOS */
-.pageInicio_gal_services
-	//Articulos
-	.item-service
-		font-family: "Roboto Condensed" , sans-serif
+//SECCIÓN CATEGORIAS DE PRODUCTOS
+.pageInicio__product-categories
+	padding: 0 0 48px
+	//Item o Artículo
+	.itemCatProduct
+		color      : black 
+		font-family: 'Raleway', sans-serif
+		margin     : 0 15%
 		//Imagen
 		figure 
-			margin    : 0 auto 30px 
-			max-height: 100px 
-			overflow  : hidden
-			img 
-				+transition( all 900ms ease-in )
-		//Titulo
-		h3 
-			font-size  : 20px 
-			font-weight: 600
-			line-height: 1em 
-			margin     : 0 auto 16px 
-		//Extracto o parrafo
-		p 
-			margin: 0 auto 35px
-		//Hover Article
+			margin    : 0 auto 15px 
+			max-height: 172px 
+			max-width : 198px
+		//Hover item cat
 		&:hover 
-			figure 
-				img 
-					+scale( 1.2 )
+			img
+				+animation( heartbeat 1s ) 
 
-/* Flechas de Carousel Servicios */
-.arrowHomeSliderServices-prev
-	right: 43px 
-	top  : -80px 	
-.arrowHomeSliderServices-next
-	right: 0px 
-	top  : -80px 
+		//Titulo o nombre
+		h2 
+			+text-shadow( -1px 1px 3px black )
+			color      : white
+			display    : inline-block
+			font-family: "Lobster",cursive
+			font-size  : 40px
+			font-weight: 600
+			margin     : 0 auto 10px 
+			//span 
+			span 
+				+text-shadow( none )
+				font-size  : 38px
+				font-weight: 500
+				left       : 1px
+				position   : absolute
+				top        : 2px
+		//Parrafos y slogan
+		p 
+			font-size  : 15px
+			line-height: 1.4em 
+			margin     : 0 auto 
+		//slogan 
+		span.meta-description
+			display    : block 
+			font-size  : 24px 
+			font-style : italic
+			line-height: 1.2em 
+			margin     : 0 auto 30px 
+	
+//SECCIÓN ACERCA DE NOSOTROS
+.pageInicio__nosotros	
+	background : $theme_orange_dark
+	color      : white 
+	font-family: "Raleway", sans-serif
+	padding    : 26px 0
+	//Titulo de seccion
+	h2 
+		font-family: 'Fredoka One', cursive
+		font-size  : 38px
+		line-height: 1em 
+		margin     : 0 auto 23px 
+	//Imagen
+	figure 
+		margin  : 0
+		overflow: hidden
+		img 
+			+transition( all 800ms ease-in )
+		//Hover
+		&:hover 
+			img 
+				+scale( 1.2 )
 
-// SECCION MISCELANEO
+//SECCION MISCELANEO
 .pageInicio__miscelaneo
-	padding: 50px 0 
+	padding: 47px 0
+
+/* Galería de POST */
+.pageInicio_gal_post
+	margin: 0 auto 40px
+
+//SECCION FACEBOOK
+.pageInicio__facebook
+	padding: 0 10%
+	
+
+
+
 
 
 /***************************************************************************************/
