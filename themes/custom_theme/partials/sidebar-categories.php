@@ -13,7 +13,7 @@ $current_term = get_queried_object(); //Objeto actual si es taxonomía
 	<?php foreach( $categorias as $categoria ) : ?>
 		<a href="<?= get_term_link( $categoria ); ?>" class="link-to-item <?= $current_term->term_id == $categoria->term_id ? 'active' : '' ?>"><?php _e( $categoria->name , LANG  ); ?>
 		<!-- Icon  -->
-		<i class="fa fa-chevron-right" aria-hidden="true"></i>
+		<!--i class="fa fa-chevron-right" aria-hidden="true"></i-->
 		</a>
 	<?php endforeach; ?>
 

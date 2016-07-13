@@ -1,7 +1,7 @@
 <?php /*  Template de Categorias Blog */ ?>
 
 <!-- Header -->
-<?php get_header(); $options = get_option('theme_custom_settings');  ?>
+<?php get_header(); $theme_mod = get_option('theme_custom_settings');  ?>
 
 <!-- Incluir Banner de Pagina -->
 <?php
@@ -20,209 +20,64 @@
 ?>
 
 <!-- Contenedor Principal -->
-<main class="pageWrapper">
-	<div class="container">
-		
-		<!-- Seccion de Contenido -->
-		<section class="pageServicios__content">
-			<div class="row">
-				
-				<!-- Contenido -->
-				<div class="col-xs-12 col-md-8">
-					<section class="">
-						<?php 
-
-							/* Extraer todas las categorías padre */  
-							$categorias = get_categories( array(
-								'orderby' => 'name' , 'parent' => 0,
-							) );
-
-							/* Vamos a obtener todos los post y seleccionaremos el actual */
-							$args = array(
-								'order'          => 'DESC',
-								'orderby'        => 'date',
-								'post_status'    => 'publish',
-								'post_type'      => 'post',
-								'posts_per_page' => -1,
-								'category_name'  => $current_term->slug,
-							);
-							$total_items = get_posts( $args );
-
-							/* numero de post con esta taxonomia */
-							$number_articulos = count( $total_items ); 
-
-							/* número de cuantos post quieres presentar por pagina */
-							$post_per_page  = 3;
-
-							/* Si el número de post es mayor a la cantidad por presentar entonces
-							* se hace un carousel */
-							if ( $number_articulos > $post_per_page ) : 
-
-								/* Wrapper for slider */
+<main class="">
 	
-								/*
-								*  Attributos disponibles 
-								* data-items = number , data-items-responsive = number_mobile ,
-								* data-margins = margin_in_pixels , data-dots = true or false
-								* if data-autoplay false then not autoplay else true ;
-								*/
-							?>
+	<!-- Contenedor Contenido -->
+	<section class="pageWrapper__content pageBlog">
 
-							<div id="carousel-blog" class="section__single_gallery js-carousel-gallery" data-items="1" data-items-responsive="1" data-margins="5" data-dots="false" data-autoplay="false" >
+		<!-- Sección con Padding -->
+		<section class="sectionCommonPadding">
+			<!-- Título de Página --> <h2 class="pageSectionCommon__title pageSectionCommon__title--orange text-uppercase"> <?= __(  $current_term->name , LANG ); ?> </h2>
+			
+			<!-- Contenido -->
+			<div class="row">
+				<!-- SECCION CONTENIDO	-->
+				<section class="col-xs-12 col-md-8">
+					<?php
+						/* Setear la categoría actual como principal */
+						$the_cat_page  = $current_term;
+						/* Setear Cuantos Post Irán Por Página*/
+						$posts_on_page = 6; 
+						/*Incluir template de carousel de blog*/ 
+						include( locate_template("partials/section-get-posts.php") );
+					?>
+				</section> <!-- /-col-xs-12 col-md-8 -->
 
-								<?php  
-									/* división para saber el número total de paginación */
-									$number_items = floor( $number_articulos / $post_per_page );
-
-									$repeat_items = 1 +  $number_items; 
-
-									/* repeticiones */
-									for( $i = 0 ; $i < $repeat_items ; $i++ ){ 
-								?>  <!-- Seccion que contendrá los articulos o por la taxonomia categoria de proyecto por el numero de pagina seteado -->
-
-									<section class="pagePreview_post">
-										<?php 
-											/* argumentos y articulos */
-											$args2 = array(
-												'order'          => 'DESC',
-												'orderby'        => 'date',
-												'post_status'    => 'publish',
-												'post_type'      => 'post',
-												'posts_per_page' => $post_per_page,
-												'offset'         => $i * $post_per_page,
-												'category_name'  => $current_term->slug,
-											);
-											/* articulos */
-											$articulos = get_posts( $args2 );
-											foreach( $articulos as $articulo ) :
-										?> <!--  Articulo -->
-											<article class="articles-item">
-												<!-- Imagen -->
-												<figure class="pull-md-left">
-													<a href="<?= get_permalink( $articulo->ID ); ?>">
-														<?php 
-															$image = get_the_post_thumbnail( $articulo->ID , 'full' , array('class'=>'img-fluid center-block imgNotBlur') ); 
-															if( !empty($image) ) : echo $image;
-															else:
-														?>
-															<img src="http://lorempixel.com/980/549/sports" alt="lorempixel" class="img-fluid center-block imgNotBlur" />
-														<?php endif; ?>
-													</a>  <!-- /end of link -->
-												</figure><!-- /figure -->
-												<!-- Texto -->
-												<h3 class="articles-item-title text-uppercase">
-												<?php _e( $articulo->post_title , LANG ); ?></h3>
-												<!-- Extracto 30 palabras -->
-												<p class="articles-item-excerpt text-justify">
-												<?php _e( wp_trim_words( $articulo->post_content , 30 , ' ' ) , LANG ); ?>
-													<!-- leer más -->
-													<a class="read-more" href="<?= get_permalink( $articulo->ID ); ?>">Leer más </a>
-												</p>
-												<!-- Limpiar float --> <div class="clearfix"></div>
-											</article><!-- /.sectionPage__articles__item -->
-										<?php endforeach; ?>
-									</section> <!-- /.pagePreview_post -->		
-
-								<?php } /* end for */?>
-
-							</div> <!-- /. fin de contenedor para slider -->
-
-							<!-- Flechas de Carousel -->
-							<div class="containerArrowBlog relative">
-								<!-- Flecha Izquierda --> 
-								<a href="#" id="" class="arrow__common-slider js-carousel-prev arrowCarouselBlog-prev" data-slider="carousel-blog">
-									<i class="fa fa-chevron-left" aria-hidden="true"></i>
-								</a>								
-								<!-- Flecha Derecha --> 
-								<a href="#" id="" class="arrow__common-slider js-carousel-next arrowCarouselBlog-next" data-slider="carousel-blog">
-									<i class="fa fa-chevron-right" aria-hidden="true"></i>
-								</a>
-							</div> <!-- /. -->
-						
-						<!-- Sino hacer una seccion simple -->
-						<?php else: ?>
-							
-							<section class="pagePreview_post">
-								<?php 
-									/* argumentos y articulos */
-									$args2 = array(
-										'order'          => 'DESC',
-										'orderby'        => 'date',
-										'post_status'    => 'publish',
-										'post_type'      => 'post',
-										'posts_per_page' => -1,
-										'category_name'  => $current_term->slug,
-									);
-									/* articulos */
-									$articulos = get_posts( $args2 );
-									foreach( $articulos as $articulo ) :
-								?> <!--  Articulo -->
-									<article class="articles-item">
-										<!-- Imagen -->
-										<figure class="pull-md-left">
-											<a href="<?= get_permalink( $articulo->ID ); ?>">
-												<?php 
-													$image = get_the_post_thumbnail( $articulo->ID , 'full' , array('class'=>'img-fluid center-block imgNotBlur') ); 
-													if( !empty($image) ) : echo $image;
-													else:
-												?>
-													<img src="http://lorempixel.com/980/549/sports" alt="lorempixel" class="img-fluid center-block imgNotBlur" />
-												<?php endif; ?>
-											</a> <!-- /end of link  -->
-										</figure><!-- /figure -->
-										<!-- Texto -->
-										<h3 class="articles-item-title text-uppercase">
-										<?php _e( $articulo->post_title , LANG ); ?></h3>
-										<!-- Extracto 30 palabras -->
-										<p class="articles-item-excerpt text-justify">
-										<?php _e( wp_trim_words( $articulo->post_content , 30 , ' ' ) , LANG ); ?>
-											<!-- leer más -->
-											<a class="read-more" href="<?= get_permalink( $articulo->ID ); ?>">Leer más </a>
-										</p>
-										<!-- Limpiar float --> <div class="clearfix"></div>
-									</article><!-- /.sectionPage__articles__item -->
-								<?php endforeach; ?>
-							</section> <!-- /.pagePreview_post -->		
-
-						<?php endif; /* Fin de condicional */ ?> 	
-
-
-
-					</section> <!-- /.section -->
-				</div> <!-- /.col-xs-8 -->
-				
-				<!-- Aside de Categoria -->
-				<div class="col-xs-4 hidden-xs-down">
-					<!-- Sidebar de Servicios -->
-					<aside class="sidebarCommon">
-						<!-- Titulo de Sidebar --> <h2 class="titleSidebar"> <?php _e( "Categorías" , LANG ); ?></h2>
-						
-						<!-- Sección de Categorías -->
-						<?php foreach( $categorias as $categoria ) : ?>
-							<a href="<?= get_term_link( $categoria ); ?>" class="link-to-item <?= $current_term->term_id == $categoria->term_id ? 'active' : '' ?>"><?php _e( $categoria->name , LANG  ); ?>
-							<!-- Icon  -->
-							<i class="fa fa-chevron-right" aria-hidden="true"></i>
-							</a>
-						<?php endforeach; ?>
-
-					</aside> <!-- /.sidebarServices -->
-				</div> <!-- /.col-xs-4 -->
+				<!-- SECCION CATEGORÍAS -->
+				<section class="col-xs-12 col-md-4">
+					<?php  
+						/**
+						* Incluir template de categorías
+						*/
+						include( locate_template("partials/sidebar-categories.php") );
+					?>
+				</section> <!-- /.col-xs-12 col-md-4 -->
 
 			</div> <!-- /.row -->
-		</section> <!-- /.pageNosotros__description -->	
 
-	</div> <!-- /.container -->
+			<!-- Seccion Flechas de Carousel -->
+			<?php 
+				$total_post = isset($number_articulos) && !empty($number_articulos) ? $number_articulos : 0;
+				if( $total_post > $posts_on_page ) : 
+			?>
+				<div class="containerArrowBlog relative">
+					<!-- Flecha Izquierda --> 
+					<a href="#" id="" class="arrow__common-slider js-carousel-prev arrowCarouselBlog-prev" data-slider="carousel-blog">
+						<i class="fa fa-arrow-left" aria-hidden="true"></i>
+					</a>								
+					<!-- Flecha Derecha --> 
+					<a href="#" id="" class="arrow__common-slider js-carousel-next arrowCarouselBlog-next" data-slider="carousel-blog">
+						<i class="fa fa-arrow-right" aria-hidden="true"></i>
+					</a>
+				</div> <!-- /. -->				
+			<?php endif; ?>
+
+			<!-- Limpiar floats --> <div class="clearfix"></div>
+
+	</section> <!-- /.pageWrapper__content -->
+
 </main> <!-- /.pageWrapper -->
 
-
-<div class="container">
-<?php 
-/*
-* Incluir template servicios
-*/ 
-include( locate_template("partials/banner-services.php") );
-?>	
-</div> <!-- /.container -->
 
 
 <!-- Footer -->

@@ -159,14 +159,5 @@ include(locate_template('partials/section-category-products.php'));
 	</div> <!-- /.container -->
 </section> <!-- /.pageInicio__miscelaneo-->
 
-<?php /* Web */ ?>
-<div class="container">
-	<a class="pull-xs-right textWeb" href="<?= site_url(); ?>"> 
-		<strong>www.LaDorita.com</strong> 
-	</a>
-</div> <!-- /.container -->
-
-
-
 <!-- Footer -->
 <?php get_footer(); ?>

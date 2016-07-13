@@ -149,7 +149,8 @@ function add_banner_img_save_postdata($post_id){
 add_action( 'add_meta_boxes', 'attached_images_meta' );
 
 function attached_images_meta() {
-  $screens = array( 'post', 'page' , 'servicio' , 'proyecto' , 'habitacion'  , 'tours'); //add more in here as you see fit
+  $screens = array( 'post', 'page' , 'servicio' , 'proyecto' , 'galery-images' ); 
+  //add more in here as you see fit
 
   foreach ($screens as $screen) {
     add_meta_box(
@@ -241,7 +242,7 @@ add_action( 'add_meta_boxes', 'cd_meta_box_url_video_add' );
 function cd_meta_box_url_video_add()
 {	
 	//solo en testimonios
-	add_meta_box( 'mb-video-url', 'Link - Url del Video', 'cd_meta_box_url_video_cb', array('galeria-videos') , 'normal', 'high' );
+	add_meta_box( 'mb-video-url', 'Link - Url del Video', 'cd_meta_box_url_video_cb', array('galery-videos') , 'normal', 'high' );
 }
 //customizar box
 function cd_meta_box_url_video_cb( $post )

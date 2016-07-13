@@ -1,7 +1,10 @@
-<?php /* Template Name: Página Imágenes Plantilla */ ?>
+<?php /* Template Name: Página Fotos Imagen Plantilla */ ?>
 
 <!-- Header -->
-<?php get_header(); $options = get_option('theme_custom_settings');  ?>
+<?php 
+	get_header(); 
+	$theme_mod = get_theme_mod('theme_custom_settings'); 
+?>  
 
 <!-- Incluir Banner de Pagina -->
 <?php
@@ -10,131 +13,141 @@
 	include( locate_template("partials/banner-common-pages.php") ); 
 ?>
 
-<!-- Seccion General -->
-<section class="pageWrapper">
+<!-- Contenedor Principal -->
+<main class="">
 	
-	<div class="container">
-		<div class="row">
+	<!-- Contenedor Contenido -->
+	<section class="pageWrapper__content pageGallery">
 
-			<!-- Articulo Principal -->
-			<main class="col-xs-12 col-md-8">
+		<!-- Sección con Padding -->
+		<section class="sectionCommonPadding">
+			<!-- Título de Página --> <h2 class="pageSectionCommon__title pageSectionCommon__title--orange text-uppercase"> <?= __(  "fotos" , LANG ); ?> </h2>
 
+			<!-- Contenido de Galería -->
+			<section class="pageGallery__content">
 				<?php  
-					/* Obtenemos todos los terminos de la taxonomia de imagen */
-					$args = array(
-						'taxonomy'   => 'image_category',
-						'hide_empty' => false,
-					);
-					$cats_imagenes = get_terms( $args ); #var_dump($cats_imagenes);
-
-					/* Escogemos el primer termino */
-					$first_cat_imagenes = $cats_imagenes[0];
-
-					/* Vamos a obtener todos las imágenes de la galería segun el primer termino */
+					/**
+					* Conseguir la Primera Galería
+					*/
 					$args = array(
 						'order'          => 'ASC',
-						'orderby'        => 'menu_order',
+						'orderby'        => 'date',
 						'post_status'    => 'publish',
 						'post_type'      => 'galery-images',
-						'posts_per_page' => -1,
-						'tax_query' => array(
-							array(
-								'taxonomy' => 'image_category',
-								'field'    => 'slug',
-								'terms'    => $first_cat_imagenes->slug,
-							),
-						),
+						'posts_per_page' => 1,
 					);
-					$images = get_posts( $args );
+					$galery_master = get_posts( $args );
+					$galery_master = $galery_master[0];
+
+					//Seteando la variable para obtener el valor del array
+					//de la galería de este post
+					$item_type_post = $galery_master;
+
+					//Obtenemos todos los items en este caso de la galería
+					$input_ids_img  = get_post_meta($item_type_post->ID, 'imageurls_'.$item_type_post->ID , true);
+					//convertir en arreglo
+					$input_ids_img  = explode(',', $input_ids_img ); 
+					//Eliminar numeros negativos
+					$remove_array   = array(-1);
+					$input_ids_img  = array_diff( $input_ids_img , $remove_array ); 
+
+					//Seteamos cuantos items irán por página
+					$post_per_page = 6;
 				?>
+					<!-- Contenedor Relativo -->
+					<section class="relative">
+						<!-- Contenedor de Galería [ ] -->
+						<?php  
+							/*
+							*  Attributos disponibles 
+							* data-items = number , data-items-responsive = number_mobile ,
+							* data-margins = margin_in_pixels , data-dots = true or false 
+							*data autoplay = true or false
+							*/
+						?>
 
-				<article class="pageWrapper__article">
+						<div id="carousel-gallery-fotos" class="section__single_gallery js-carousel-gallery" data-items="1" data-items-responsive="1" data-margins="5" data-dots="false" data-autoplay="false">
+							
+							<?php
+								/* división para saber el número total de paginación */
+								$number_items = floor( count($input_ids_img) / $post_per_page );
+								$repeat_items = 1 +  $number_items; 
+								/* repeticiones */
+								for( $i = 0 ; $i < $repeat_items ; $i++ ){ ?>
 
-					<!-- Titulo --> <h2 class="titleDescriptionSection"><?php _e( $first_cat_imagenes->name , LANG ); ?></h2>
+							<!-- SECCION CONTENEDOR DE ITEMS -->
+							<section class="pageGallery__section">	
+								<div class="row">	
+									<?php
+										//Hacer loop por cada item de arreglo
+										//con un offset o paso despues de x 
+										//elementos 
+										$inicio_array = ( ($post_per_page - 1 ) * $i ) + $i;
+										$fin_array    = $inicio_array + $post_per_page;
 
-					<!-- Galería de Imágenes -->
-					<section class="pageGallery__content">
-						<div class="row">
-							<?php foreach( $images as $image ) :  ?>
-								<!-- Artículo -->
-								<?php 
-									if( has_post_thumbnail( $image->ID ) ) : 
-									//Url Imagen Destacada 
-									$url_feat_img = wp_get_attachment_url( get_post_thumbnail_id( $image->ID ) );
-								?>
-									<article class="item-gallery col-xs-4">
-										<!-- Link Abre Imagen Fancybox -->
-										<a href="<?= $url_feat_img; ?>" class="gallery-fancybox" rel="group" title="<?php _e( $image->post_title , LANG ); ?>">
-											<!-- Imagen --> <figure>
-												<?= get_the_post_thumbnail( $image->ID , 'full' , array('class'=>'img-fluid imgNotBlur') ); ?>
-											</figure> <!-- /.figure -->
-										</a> <!-- /.link  -->
-									</article> <!-- /.item-gallery -->
-								<?php endif; ?>
-							<?php endforeach; ?>
-						</div> <!-- /.row -->
-					</section> <!-- /. pageGallery__content-->
-			
-				</article> <!-- /. -->
+										$new_array_img = array_slice( $input_ids_img , $inicio_array , $fin_array );
 
-			</main> <!-- /.col-xs-12 -->
+										//var_dump($new_array_img);
 
-			<!-- Sidebar  Ocultar en mobile -->
-			<aside class="col-md-4 hidden-xs-down">
-				
-				<!-- Sección de Categorias de Imagen  -->
-				<section class="sectionLinks__sidebar">
-					<!-- Extraemos todos las categorias de imagen que se encuentra en la variable $cats_imagenes -->
-					<?php
-						//variable de control 
-						$control = 0;  
-						foreach( $cats_imagenes as $cat_imagen ) : 	
-					?>
-						<a href="<?= get_term_link( $cat_imagen ); ?>" class="link-to-item <?= $control == 0 ? 'active' : '' ?>"><?php _e( $cat_imagen->name , LANG  ); ?></a>
-					<?php $control++; endforeach; ?>
-				</section> <!-- /.sectionLinks__sidebar -->
+										foreach ( $new_array_img as $item_img ) : 
+											//Si es diferente de null o tiene elementos
+											if( !empty($item_img) ) : 
+											//Conseguir todos los datos de este item
+											$item = get_post( $item_img  );
+									?> <!-- Artículo -->
+										<div class="col-xs-12 col-md-4">
+											<article class="item-gallery relative">
+												<!-- LINK -->
+												<a href="<?= $item->guid; ?>" class="gallery-fancybox center-block relative" rel="group" title="<?= !empty($item->post_content) ? $item->post_content : "Image"; ?>">
+													<!-- Imagen -->
+													<figure><img src="<?= $item->guid; ?>" alt="<?= $item->post_title; ?>" class="img-fluid" /></figure>
 
+													<!-- Hover Imagen -->
+													<div class="container-hover container-flex align-content">
+														<!-- Icon plus -->
+														<div class="fullwidth">
+															<i class="fa fa-plus container-flex align-content" aria-hidden="true"></i>
+														</div> <!-- /center-block -->
+														<!-- Name Image o Descripción -->
+														<?= !empty($item->post_content) ? $item->post_content : "Image"; ?>
+													</div> <!-- /-container-hover -->
+													
+												</a> <!-- /.gallery-fancybox -->
 
-				<?php if ( is_active_sidebar( 'sidebar-publicidad-hotel' ) ) : ?>
-					<?php dynamic_sidebar( 'sidebar-publicidad-hotel' ); ?>
-				<?php else: __("Actualizando contenido" , LANG ) ; endif; ?>
+											</article> <!-- /.item-gallery -->
+										</div> <!-- /(.col-xs-12 col-md-4) -->
 
-				<!-- Sección Facebook -->
-				<?php
-					if( isset($options['red_social_fb']) && !empty($options['red_social_fb']) ) :
-				?>
-					<section class="container__facebook">
-						
-						<!-- Titulo -->
-						<h2 class="titleWidget text-uppercase"><?php _e( "Facebook", LANG ); ?></h2>			
-			
-						<!-- Contebn -->
-						<div id="fb-root" class=""></div>
+									<?php endif; endforeach; ?>
+								</div> <!-- /.row -->
+							</section> <!-- /.pageGallery__section -->
 
-						<!-- Script -->
-						<script>(function(d, s, id) {
-							var js, fjs = d.getElementsByTagName(s)[0];
-							if (d.getElementById(id)) return;
-							js = d.createElement(s); js.id = id;
-							js.src = "//connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v2.5";
-							fjs.parentNode.insertBefore(js, fjs);
-						}(document, 'script', 'facebook-jssdk'));</script>
+							<!-- Finalización de las Repeticiones -->
+							<?php } ?>
 
-						<div class="fb-page" data-href="<?= $options['red_social_fb']; ?>" data-tabs="timeline" data-small-header="false" data-adapt-container-width="true" data-height="500" data-hide-cover="false" data-show-facepile="true">
-						</div> <!-- /. fb-page-->
-					</section> <!-- /.container__facebook -->
-				<?php else: ?>
-					<p class="text-xs-center">Opcion no habilitada temporalmente</p>
-				<?php endif; ?>	
+						</div> <!-- /.section__single_gallery -->
 
-				<!-- Separador --> <p></p>				
+					</section> <!-- /.relative -->	
 
-			</aside> <!-- /.col-md-4 hidden-xs-down -->
+			</section> <!-- /-pageGallery__content -->
 
-		</div> <!-- /.row -->
-	</div> <!-- /.container -->
+			<!-- FLECHAS DE GALERÍA -->
+			<div class="relative">
+				<!-- Flecha Izquierda --> 
+				<a href="#" id="" class="arrow__common-slider js-carousel-prev arrowCarouselBlog-prev" data-slider="carousel-gallery-fotos">
+					<i class="fa fa-arrow-left" aria-hidden="true"></i>
+				</a>								
+				<!-- Flecha Derecha --> 
+				<a href="#" id="" class="arrow__common-slider js-carousel-next arrowCarouselBlog-next" data-slider="carousel-gallery-fotos">
+					<i class="fa fa-arrow-right" aria-hidden="true"></i>
+				</a>
+			</div> <!-- /. -->				
 
-</section> <!-- /.pageRooms -->
+		</section> <!-- /.sectionCommonPadding -->
+
+	</section> <!-- /.pageWrapper__content -->
+
+</main> <!-- /.pageWrapper -->
+
 
 <!-- Footer -->
 <?php get_footer(); ?>

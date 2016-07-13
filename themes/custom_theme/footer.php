@@ -1,6 +1,13 @@
 
 <!-- Extraer opciones  -->
 <?php $theme_mod = get_theme_mod('theme_custom_settings'); ?>
+
+	<?php /* Web */ ?>
+	<div class="container">
+		<a class="pull-xs-right textWeb" href="<?= site_url(); ?>"> 
+			<strong>www.LaDorita.com</strong> 
+		</a>
+	</div> <!-- /.container -->
 	
 	<!-- Footer -->
 	<footer class="mainFooter">
@@ -139,7 +146,6 @@
 				<div class="text-xs-center"> &copy; <?= date("Y"); ?> La Dorita. Derechos reservados Design by <a target="_blank" href="http://www.ingenioart.com/">INGENIOART</a></div>
 			</div> <!-- /.container -->
 		</section> <!-- /.mainFooter__develop -->
-
 
 	</footer><!-- /.mainFooter -->
 

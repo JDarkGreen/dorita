@@ -81,14 +81,14 @@ function create_post_type(){
 	
 	$labels4 = array(
 		'name'               => __('Gal. Imágenes'),
-		'singular_name'      => __('Imagen'),
-		'add_new'            => __('Nueva Imagen'),
-		'add_new_item'       => __('Agregar nueva Imagen'),
-		'edit_item'          => __('Editar Imagen'),
-		'view_item'          => __('Ver Imagen'),
-		'search_items'       => __('Buscar Imagen'),
-		'not_found'          => __('Imagen no encontrada'),
-		'not_found_in_trash' => __('Imagen no encontrada en la papelera'),
+		'singular_name'      => __('Galería'),
+		'add_new'            => __('Nueva Galería'),
+		'add_new_item'       => __('Agregar nueva Galería'),
+		'edit_item'          => __('Editar Galería'),
+		'view_item'          => __('Ver Galería'),
+		'search_items'       => __('Buscar Galería'),
+		'not_found'          => __('Galería no encontrada'),
+		'not_found_in_trash' => __('Galería no encontrada en la papelera'),
 	);
 
 	$args4 = array(
@@ -153,9 +153,9 @@ function create_post_type(){
 	register_post_type( 'slider-home' , $args  );
 	register_post_type( 'servicio' , $args2 );
 	register_post_type( 'cliente' , $args3 );
+	register_post_type( 'galery-images' , $args4 );
+	register_post_type( 'galery-videos' , $args5 );
 	register_post_type( 'producto-dorita' , $args6 );
-	//register_post_type( 'galery-images' , $args4 );
-	//register_post_type( 'galery-videos' , $args5 );
 
 	flush_rewrite_rules();
 }
