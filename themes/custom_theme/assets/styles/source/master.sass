@@ -62,6 +62,17 @@ body,html
 	width      : 100% 
 
 /***************************************************************************************/
+/**------------------------ Overwhite Placeholder  -----------------------------------**/
+/***************************************************************************************/
+
+::-webkit-input-placeholder
+	color: white
+
+::-moz-placeholder 
+	color  : white
+	opacity: 1
+
+/***************************************************************************************/
 /**-------------------------- KEYFRAMES  ---------------------------------------------**/
 /***************************************************************************************/
 
@@ -249,11 +260,22 @@ body,html
 	//hover y focus
 	&:hover , &:focus
 		color          : white 
+		outline        : 0px !important
 		text-decoration: none 
 	&:hover 
 		+box-shadow( inset 300px 0 0 0 white )
 		border: 1px solid $theme_orange
 		color : $theme_orange
+
+//++VARIACION A REVERSO
+.btnCommon__show-more--reverse
+	background: white
+	border    : 1px solid white 
+	color     : $theme_orange
+	&:hover 
+		+box-shadow( inset 300px 0 0 0 $theme_orange )
+		border: 1px solid $theme_orange
+		color : white	
 
 //++VARIACION A TRANSPARENTE
 .btnCommon__show-more--transparent
@@ -309,6 +331,7 @@ body,html
 //REDES SOCIALES
 //+Redes Sociales - ul
 .social-links
+	display        : inline-block
 	list-style-type: none 
 	margin         : 0
 	padding        : 0 
@@ -331,7 +354,8 @@ body,html
 .social-links--gray
 	li 
 		a 
-			color: $theme_gray 
+			background: $theme_gray_oscuro 
+			color     : white
 
 //BOTÓN HACIA ARRIBA 
 #arrow-up-page
@@ -515,10 +539,8 @@ body,html
 .pageCommon__list-data--gray
 	margin: 0 
 	li 
-		color: $theme_gray_oscuro
-		i 
-			color: $theme_gray_oscuro
-
+		color      : $theme_gray_oscuro
+		font-weight: 600
 
 
 //Fondo verde
@@ -939,50 +961,47 @@ body,html
 /**--  PÁGINA CONTACTO ---------------------------------------------------------------**/
 /***************************************************************************************/
 
-/* Lista de Página Contacto */
-.pageContact__list-data
-	font-family    : "Roboto Condensed" , sans-serif 
-	list-style-type: none 
-	padding        : 0 0 0 35px
-	li 
-		display  : flex
-		flex-wrap: wrap
-		margin   : 0 auto 5px 
-		//Icono
-		i 
-			height: 20px 
-			margin: 0 11px 0 -30px
-			width : 20px 
-		//Párrafo
-		p 
-			margin: 0 auto 5px
-			width : 99%
+/** SECCION GENERAL **/
+.pageContacto
+	
+	/**  Título **/
+	h3 
+		color      : $theme_gray_oscuro
+		font-size  : 20px 
+		font-weight: 700
+		margin     : 0 auto 15px 
 
-/* Separación Página de Contacto */
-#pageContact__separation
-	height: 1px 
-	margin: 44px auto
+/* Sección Formulario de Contacto */
+.pageContacto__formulary
+	background: $theme_orange_dark
+	max-width : 480px
+	padding   : 40px
+	width     : 100%
 
-/* Formulario de Contacto */
-.pageContacto__form
-	max-width: 380px 
-	width    : 100%
+	//Título de sección
+	h2 
+		color      : white
+		font-family: "Fredoka One",cursive
+		font-size  : 20px
+		line-height: 1em
+		margin     : 0 auto 34px
 
 /* Grupo inputs y textarea dentro de formulario */
 .pageContacto__form__group
 	margin: 0 auto 13px
 	/* inputs y texarea */
 	input , textarea
-		+border-radius( 4px )
-		border : 1px solid $theme_gray_semiclaro
-		color  : $theme_gray_oscuro
-		outline: 0
-		padding: 5px 7px 
-		width  : 100%
+		+border-radius( 30px )
+		background: $theme_orange
+		border    : 1px solid $theme_orange
+		color     : white
+		outline   : 0
+		padding   : 7px 20px 
+		width     : 100%
 	/* Solo texarea */
 	textarea
-		height    : 135px 
-		max-height: 135px 
+		height    : 115px 
+		max-height: 115px 
 
 //SECCIÓN DE MAPA
 #canvas-map

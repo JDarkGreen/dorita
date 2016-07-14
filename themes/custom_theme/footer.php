@@ -50,35 +50,37 @@
 							</ul> <!-- /.pageCommon__list-data -->
 
 							<!-- Redes Sociales -->
-							<ul class="social-links text-xs-center">
-								<!-- Facebook -->
-								<?php if( isset($theme_mod['red_social_fb']) && !empty($theme_mod['red_social_fb']) ): ?>
-									<li> 
-										<a href="<?= $theme_mod['red_social_fb']; ?>" target="_blank">
-											<!-- Icon -->  
-											<i class="fa fa-facebook" aria-hidden="true"></i>
-										</a>
-									</li>
-								<?php endif; ?>								
-								<!-- Twitter -->
-								<?php if( isset($theme_mod['red_social_twitter']) && !empty($theme_mod['red_social_twitter']) ): ?>
-									<li> 
-										<a href="<?= $theme_mod['red_social_twitter']; ?>" target="_blank">
-											<!-- Icon -->  
-											<i class="fa fa-twitter" aria-hidden="true"></i>
-										</a>
-									</li>
-								<?php endif; ?>								
-								<!-- Youtube -->
-								<?php if( isset($theme_mod['red_social_ytube']) && !empty($theme_mod['red_social_ytube']) ): ?>
-									<li> 
-										<a href="<?= $theme_mod['red_social_ytube']; ?>" target="_blank">
-											<!-- Icon -->  
-											<i class="fa fa-youtube" aria-hidden="true"></i>
-										</a>
-									</li>
-								<?php endif; ?>
-							</ul> <!-- /.social-links -->
+							<div class="center-block text-xs-center">
+								<ul class="social-links">
+									<!-- Facebook -->
+									<?php if( isset($theme_mod['red_social_fb']) && !empty($theme_mod['red_social_fb']) ): ?>
+										<li> 
+											<a href="<?= $theme_mod['red_social_fb']; ?>" target="_blank">
+												<!-- Icon -->  
+												<i class="fa fa-facebook" aria-hidden="true"></i>
+											</a>
+										</li>
+									<?php endif; ?>								
+									<!-- Twitter -->
+									<?php if( isset($theme_mod['red_social_twitter']) && !empty($theme_mod['red_social_twitter']) ): ?>
+										<li> 
+											<a href="<?= $theme_mod['red_social_twitter']; ?>" target="_blank">
+												<!-- Icon -->  
+												<i class="fa fa-twitter" aria-hidden="true"></i>
+											</a>
+										</li>
+									<?php endif; ?>								
+									<!-- Youtube -->
+									<?php if( isset($theme_mod['red_social_ytube']) && !empty($theme_mod['red_social_ytube']) ): ?>
+										<li> 
+											<a href="<?= $theme_mod['red_social_ytube']; ?>" target="_blank">
+												<!-- Icon -->  
+												<i class="fa fa-youtube" aria-hidden="true"></i>
+											</a>
+										</li>
+									<?php endif; ?>
+								</ul> <!-- /.social-links -->
+							</div> <!-- /.center-block  -->
 
 						</div> <!-- /.mainFooter__item -->
 					</div> <!-- /.col-xs-12 col-md-3 -->
