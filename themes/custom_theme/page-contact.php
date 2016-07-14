@@ -14,185 +14,62 @@
 ?>
 
 <!-- Contenedor Principal -->
-<main class="pageWrapper">
+<main class="">
 	
-	<div class="container">
+	<!-- Contenedor Contenido -->
+	<section class="pageWrapper__content pageContacto">
+
+		<!-- Sección con Padding -->
+		<section class="sectionCommonPadding">
+			<!-- Título de Página --> <h2 class="pageSectionCommon__title pageSectionCommon__title--orange text-uppercase"> <?= __(  $post->post_title , LANG ); ?> </h2>
+
+			<!-- Datos de Empresa -->
+			<ul class="pageCommon__list-data pageCommon__list-data--gray text-xs-left">
+				<!-- Teléfonos -->
+				<?php if( isset($theme_mod['contact_tel']) && !empty($theme_mod['contact_tel']) ) : ?>
+					<li> <!-- Imagen --> 
+						<i> <img src="<?= IMAGES ?>/icon/iconos_contacto_telefono.png" alt="" class="img-fluid" /></i>
+
+						<?php 
+							/* Extraer todos los teléfonos y convertirlos en array*/ 
+							$telefonos  = explode(",", $theme_mod['contact_tel'] );
+							for( $i = 0 ; $i < count($telefonos) ; $i++ )
+							{
+								$separacion = $i != count($telefonos) -1 ? " / " : "";
+								echo $telefonos[$i] . $separacion;
+							} 
+						?>
+					</li>
+				<?php endif; ?>								
+				<!-- Celular -->
+				<?php if( isset($theme_mod['contact_cel']) && !empty($theme_mod['contact_cel']) ) : ?>
+					<li> <!-- Imagen --> 
+						<i> <img src="<?= IMAGES ?>/icon/iconos_contacto_rpm.png" alt="" class="img-fluid" /></i>
+
+						<?php 
+							/* Extraer todos los celulares y convertirlos en array*/ 
+							$celulares  = explode(",", $theme_mod['contact_cel'] );
+							for( $i = 0 ; $i < count($celulares) ; $i++ )
+							{
+								$separacion = $i != count($celulares) -1 ? " / " : "";
+								echo $celulares[$i] . $separacion;
+							} 
+						?>
+					</li>
+				<?php endif; ?>								
+				<!-- Email -->
+				<?php if( isset($theme_mod['contact_email']) && !empty($theme_mod['contact_email']) ) : ?>
+					<li> <!-- Imagen --> 
+						<i> <img src="<?= IMAGES ?>/icon/iconos_contacto_mail.png" alt="" class="img-fluid" /></i>
+						<?=  $theme_mod['contact_email']; ?>
+					</li>
+				<?php endif; ?>
+			</ul> <!-- /.mainFooter__list-data -->			
+			
+
+		</section> <!-- /.sectionCommonPadding -->
 		
-		<!-- Primera Fila -->
-		<div class="row">
-
-			<!-- SECCIÓN DE DATOS  -->
-			<div class="col-xs-12 col-md-6">
-	
-				<section class="pageContact__data">
-					<!-- Titulo --> <h2 class="pageSectionCommon__title text-uppercase text-xs-center text-md-left"><?php _e( "Datos generales" , LANG ); ?></h2> 
-					<!-- Separación --> <br/>
-
-					<!-- Lista de Datos -->
-					<ul class="pageContact__list-data">
-
-						<!-- Telefono -->
-						<?php if( isset($theme_mod['contact_tel']) && !empty($theme_mod['contact_tel']) ) : ?>
-							<li> <!-- Icono --> <i class="fa fa-phone" aria-hidden="true"></i>
-							<?php 
-								$numeros = $theme_mod['contact_tel'];
-								$numeros = explode( "," , $numeros );
-								foreach( $numeros as $numero => $value ) : 
-							?> <p> <?= $value; ?></p>
-							<?php endforeach; ?>
-							</li>
-						<?php endif; ?>								
-
-						<!-- Celular -->
-						<?php if( isset($theme_mod['contact_cel']) && !empty($theme_mod['contact_cel']) ) : ?>
-							<li> <!-- Icono --> <i class="fa fa-mobile" aria-hidden="true"></i>
-							<?php 
-								$celulares = $theme_mod['contact_cel'];
-								$celulares = explode( "," , $celulares );
-								foreach( $celulares as $celular => $value ) : 
-							?> <p> <?= $value; ?></p>
-							<?php endforeach; ?>
-							</li>
-						<?php endif; ?>
-
-						<!-- Email -->
-						<?php if( isset($theme_mod['contact_email']) && !empty($theme_mod['contact_email']) ) : ?>
-							<li> <!-- Icono --> <i class="fa fa-envelope" aria-hidden="true"></i>
-								<?= $theme_mod['contact_email']; ?>
-							</li>
-						<?php endif; ?>
-
-						<!-- Dirección -->
-						<?php if( isset($theme_mod['contact_address']) && !empty($theme_mod['contact_address']) ) : ?>
-							<li> <!-- Icono --> <i class="fa fa-map-marker" aria-hidden="true"></i>
-								<?= $theme_mod['contact_address']; ?>
-							</li>
-						<?php endif; ?>
-
-					</ul> <!-- /.mainFooter__list-data -->
-
-				</section> <!-- /. -->
-
-				<!-- Separación en mobile --> <br class="hidden-sm-up" />
-
-			</div> <!-- /.col-xs-12 col-md-6 -->
-
-			<!-- SECCIÓN DE REDES SOCIALES  -->
-			<div class="col-xs-12 col-md-6 text-xs-center text-md-left">
-
-				<section class="pageContact__social">
-					<!-- Titulo --> <h2 class="pageSectionCommon__title text-uppercase"><?php _e( "redes sociales" , LANG ); ?></h2>
-					<!-- Separación  --> <br/>
-
-					<!-- Lista de Redes Sociales -->
-					<ul class="social-links social-links--gray">
-						<!-- Facebook -->
-						<?php if( isset($theme_mod['red_social_fb']) && !empty($theme_mod['red_social_fb']) ) : ?>
-							<li><a target="_blank" href="<?= $theme_mod['red_social_fb']; ?>">
-								<i class="fa fa-facebook" aria-hidden="true"></i>
-							</a></li>
-						<?php endif; ?>
-						<!-- Twitter -->
-						<?php if( isset($theme_mod['red_social_twitter']) && !empty($theme_mod['red_social_twitter']) ): ?>
-							<li><a target="_blank" href="<?= $theme_mod['red_social_twitter']; ?>"><i class="fa fa-twitter" aria-hidden="true"></i></a> </li>
-						<?php endif; ?>
-						<!-- Youtube -->
-						<?php if( isset($theme_mod['red_social_ytube']) && !empty($theme_mod['red_social_ytube']) ) : ?>
-							<li><a target="_blank" href="<?= $theme_mod['red_social_ytube']; ?>"><i class="fa fa-youtube" aria-hidden="true"></i></a> </li>
-						<?php endif; ?>
-					</ul> <!-- /.social-links -->
-
-				</section> <!-- /. -->
-				
-			</div> <!-- /.col-xs-12 col-md-6 -->
-
-		</div> <!-- /.row -->
-
-		<!-- Separación margenes --> <div id="pageContact__separation"></div>	
-		<!-- Limpiar floats --> <div class="clearfix"></div>
-
-		<!-- Otra Fila row -->
-		<div class="row">
-
-			<!-- SECCIÓN DE FORMULARIO DE CONTACTO  -->
-			<div class="col-xs-12 col-md-6 text-xs-center text-md-left">
-
-				<section class="pageContact__formulary">
-					<!-- Titulo --> <h2 class="pageSectionCommon__title text-uppercase"><?php _e( "Nuestro formulario" , LANG ); ?></h2>
-
-					<!-- Separación --> <br/>
-
-					<!-- Formulario -->
-					<form id="form-contacto" action="" class="pageContacto__form" method="POST">
-
-						<!-- Nombre -->
-						<div class="pageContacto__form__group">
-							<label for="input_name" class="sr-only"></label>
-							<input type="text" id="input_name" name="input_name" placeholder="<?php _e( 'Nombre(obligatorio)', LANG ); ?>" required />
-						</div> <!-- /.pageContacto__form__group -->
-
-						<!-- Email -->
-						<div class="pageContacto__form__group">
-							<label for="input_email" class="sr-only"></label>
-							<input type="email" id="input_email" name="input_email" placeholder="<?php _e( 'E-mail(obligatorio)', LANG ); ?>" data-parsley-trigger="change" required="" data-parsley-type-message="Escribe un email válido"/>
-						</div> <!-- /.pageContacto__form__group -->						
-
-						<!-- Teléfono -->
-						<div class="pageContacto__form__group">
-							<label for="input_phone" class="sr-only"></label>
-							<input type="text" id="input_phone" name="input_phone" placeholder="<?php _e( 'Teléfono(obligatorio)', LANG ); ?>" data-parsley-type='digits' data-parsley-type-message="Solo debe contener números" required="" />
-						</div> <!-- /.pageContacto__form__group -->
-
-						<!-- Asunto -->
-						<div class="pageContacto__form__group">
-							<label for="input_subject" class="sr-only"></label>
-							<input type="text" id="input_subject" name="input_subject" placeholder="<?php _e( 'Asunto', LANG ); ?>" required />
-						</div> <!-- /.pageContacto__form__group -->
-
-						<!-- Mensaje -->
-						<div class="pageContacto__form__group">
-							<label for="input_consulta" class="sr-only"></label>
-							<textarea name="input_consulta" id="input_consulta" placeholder="<?php _e( 'Mensaje', LANG ); ?>" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Necesitas más de 20 caracteres" data-parsley-validation-threshold="10"></textarea>
-						</div> <!-- /.pageContacto__form__group -->
-
-						<button type="submit" id="send-form" class="btnCommon__show-more btnCommon__show-more--rojo text-uppercase">
-							<?php _e( 'enviar' , LANG ); ?>
-						</button> <!-- /.btn__send-form -->
-
-						<!-- Limpiar Floats  --> <div class="clearfix"></div>
-
-					</form> <!-- /.pageContacto__form -->
-
-				</section> <!-- /. -->	
-
-				<!-- Separación en mobile --> 
-				<br class="hidden-sm-up" />			
-				<br class="hidden-sm-up" />			
-
-			</div> <!-- /.col-xs-12 col-md-6 text-xs-center text-md-left -->
-
-			<!-- SECCION DE MAPA -->
-			<div class="col-xs-12 col-md-6">
-
-				<section class="pageContact__map">
-					
-					<div class="container"> <!-- Titulo --> <h2 class="pageSectionCommon__title text-uppercase col-xs-6"><?php _e( "mapa" , LANG ); ?></h2> </div>
-
-					<!-- Separador --> <br/>
-					
-					<?php if( isset($theme_mod['contact_mapa']) && !empty($theme_mod['contact_mapa']) ) : ?>
-					<div id="canvas-map"></div>
-					<?php else: ?>
-						<div class="container"> <?php _e("Actualizando Contenido" , LANG ); ?></div>
-					<?php endif; ?>
-
-				</section> <!-- /.pageContact__map -->	
-
-			</div> <!-- /.col-xs-12 col-md-6 -->
-
-		</div> <!-- /.row -->
-
-	</div> <!-- /.container -->
+	</section> <!-- /.pageWrapper__content -->
 
 </main> <!-- /.pageWrapper -->
 

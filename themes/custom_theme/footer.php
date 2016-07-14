@@ -40,14 +40,14 @@
 							<h2 class="mainFooter__subtitle text-xs-center"><?php _e('Encuéntranos' , LANG ); ?></h2>
 
 							<!-- Ubicación -->
-							<ul class="mainFooter__list-data">
+							<ul class="pageCommon__list-data">
 								<?php if( isset($theme_mod['contact_address']) && !empty($theme_mod['contact_address']) ) : ?>
 								<li> 
 									<!-- Imagen --> <i> <img src="<?= IMAGES ?>/icon/iconos_contacto_direccion.png" alt="" class="img-fluid" /></i>
 									<?= apply_filters("the_content" , $theme_mod['contact_address'] ); ?>
 								</li>
 								<?php endif; ?>
-							</ul> <!-- /.mainFooter__list-data -->
+							</ul> <!-- /.pageCommon__list-data -->
 
 							<!-- Redes Sociales -->
 							<ul class="social-links text-xs-center">
@@ -92,7 +92,8 @@
 							<!-- Saparación --> 
 							<p></p>
 							
-							<ul class="mainFooter__list-data text-xs-left">
+							<!-- List data -->
+							<ul class="pageCommon__list-data text-xs-left">
 								<!-- Teléfonos -->
 								<?php if( isset($theme_mod['contact_tel']) && !empty($theme_mod['contact_tel']) ) : ?>
 									<li> <!-- Imagen --> 

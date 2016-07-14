@@ -35,16 +35,16 @@
 $theme_gray          : #AEAEAE
 $theme_gray_semiclaro: #CDCDCD
 $theme_gray_claro    : #EBE9EE
-$theme_gray_oscuro   : #7F7F81
 $theme_guinda        : #A70032
 
 // Actualización de Colores
+$theme_blue       : #25569C
+$theme_gray_oscuro: #424242
 $theme_green      : #0F6800
-$theme_yellow     : #FFE700
+$theme_melon      : #FFF9E7
 $theme_orange     : #FF8300
 $theme_orange_dark: #FF5C14
-$theme_blue       : #25569C
-$theme_melon      : #FFF9E7
+$theme_yellow     : #FFE700
 
 
 $theme_facebook   : #3A5998
@@ -489,6 +489,38 @@ body,html
 .sectionBackgroundFruts
 	background: url('../../images/backgrounds/fondo_web_la_dorita_frutas_pulpas_lima_peru.jpg') no-repeat 
 
+
+/*[ $LISTA DE DATOS DE EMPRESA ] */
+
+/* Lista de Datos */
+.pageCommon__list-data
+	list-style-type: none 
+	margin         : 0 5% 
+	padding        : 0 0 0 35px
+	li 
+		display  : flex
+		flex-wrap: wrap
+		margin   : 0 auto 5px 
+		//Icono
+		i 
+			height: 20px 
+			margin: 0 11px 0 -30px
+			width : 20px 
+		//Párrafo
+		p 
+			margin: 0 auto 5px
+			width : 99%
+
+/*++ Variación a Color gris **/
+.pageCommon__list-data--gray
+	margin: 0 
+	li 
+		color: $theme_gray_oscuro
+		i 
+			color: $theme_gray_oscuro
+
+
+
 //Fondo verde
 .bgGreenLemon
 	background-color: $theme_green
@@ -507,6 +539,7 @@ body,html
 	color      : $theme_orange
 	font-family: "Raleway", sans-serif
 	font-size  : 20px
+	margin     : 0 30px 
 	//hover
 	&:hover 
 		+animation( heartbeat 1s )  
@@ -964,12 +997,11 @@ body,html
 //SECCIÓN
 .mainFooter
 	background     : url("../../images/backgrounds/footer_la_dorita_frutas_pulpas_lima_peru.png") no-repeat
-	background-size: cover 
-	color          : white
-	font-family    : "Raleway", sans-serif
-	height         : 303px 
+	background-size: 100% 100%
+	color          : #fff
+	font-family    : "Raleway",sans-serif
 	margin         : -80px auto 0
-	padding        : 129px 0 0 0
+	padding        : 135px 0 0 0
 
 //Logo
 .mainFooter__logo
@@ -981,24 +1013,6 @@ body,html
 	font-size  : 15px 
 	font-weight: 600 
 	margin     : 0 auto 15px 
-/* Lista de Datos */
-.mainFooter__list-data
-	list-style-type: none 
-	margin         : 0 5% 
-	padding        : 0 0 0 35px
-	li 
-		display  : flex
-		flex-wrap: wrap
-		margin   : 0 auto 5px 
-		//Icono
-		i 
-			height: 20px 
-			margin: 0 11px 0 -30px
-			width : 20px 
-		//Párrafo
-		p 
-			margin: 0 auto 5px
-			width : 99%
 
 /* Item de Footer contiene informaciones */
 .mainFooter__item
@@ -1015,7 +1029,7 @@ body,html
 //++Seccion de Desarrollo
 .mainFooter__develop
 	font-size : 13px 
-	padding   : 5px 0
+	padding   : 15px 0
 	/* Link */
 	a 
 		color: white
