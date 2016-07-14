@@ -912,34 +912,6 @@ body,html
 
 
 /***************************************************************************************/
-/**--  PAGINA CLIENTE ----------------------------------------------------------------**/
-/***************************************************************************************/
-
-/* Articulo o Item de Cliente */
-.itemCliente
-	font-family: "Roboto Condensed" , sans-serif
-	margin     : 0 auto 25px 
-	/* Imagen */
-	figure 
-		margin  : 0 auto 30px
-		overflow: hidden
-		img 
-			+transition( all 500ms ease-in )
-		//hover image
-		&:hover 
-			img 
-				+scale( 1.2 )
-
-/* Contenido de Item de cliente */
-.itemCliente__content 
-	margin: 10px auto 0
-	/* Para las listas */
-	ul 
-		margin : 0 
-		padding: 0 0 0 20px
-
-
-/***************************************************************************************/
 /**--  PAGINA BLOG  ----------------------------------------------------------------**/
 /***************************************************************************************/
 
@@ -956,6 +928,56 @@ body,html
 	h3 
 		font-size  : 30px 
 		font-weight: 600 
+
+/***************************************************************************************/
+/**--  PÁGINA PEDIDOS --- ------------------------------------------------------------**/
+/***************************************************************************************/
+
+//SECCION DE CONTENIDO
+.pagePedido__content
+	margin: 90px auto 0
+
+	//Imagenes Internas
+	img 
+		height   : auto 
+		max-width: 100%
+		width    : 100%
+
+//SIDEBAR PRODUCTOS
+//.sidebarProducts
+
+//SECCION DE PRODUCTOS
+.productSection
+	border: 1px solid $theme_gray
+	margin: 0 auto 24px 
+	//Titulo
+	h3 
+		background : $theme_green
+		color      : white 
+		font-size  : 20px
+		font-weight: 600
+		margin     : 0 
+		padding    : 8px 41px
+	//item de producto
+	.item-product
+		font-size  : 14px
+		line-height: 1em
+		margin     : 0px 0px 14px
+	//contenedor input medida o cantidad de producto
+	.container-pedido 
+		display: none
+
+	//Input checkbox
+	input[type="checkbox"]
+		margin: 0 14px 0 0	
+	//Input text
+	input[type="text"]
+		font-size: 11px
+
+//Contenedor 
+.productSection__content
+	padding: 16px
+
 
 /***************************************************************************************/
 /**--  PÁGINA CONTACTO ---------------------------------------------------------------**/

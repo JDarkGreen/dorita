@@ -253,6 +253,50 @@ var j = jQuery.noConflict();
 
 
 		/*|-------------------------------------------------------------|*/
+		/*|-----  EVENTO AL DAR CHECK EN UN INPUT CHECKBOX.  ------|*/
+		/*|--------------------------------------------------------------|*/
+
+		if( j("input.js-checkbox-product").length )
+		{
+			j("input.js-checkbox-product").on('click', function(e){
+				//Si el campo esta en check
+				if( j(this).is(':checked') ){ 
+					//activar contenedor de input value
+					j(this)
+					.parent(".item-product")
+					.find(".container-pedido").fadeIn();
+				}else{
+					//ocultar campo
+					j(this)
+					.parent(".item-product")
+					.find(".container-pedido").fadeOut();
+					//remover valores anteriores
+					j(this)
+					.parent(".item-product")
+					.find(".container-pedido input").val("");
+				}
+			});
+		}		
+
+		/*|-------------------------------------------------------------|*/
+		/*|-----  VALIDAR INPUT SOLO NUMEROS.  ------|*/
+		/*|--------------------------------------------------------------|*/
+
+		if( j("input.js-input-only-num").length )
+		{
+			j("input.js-input-only-num").on('keypress', function(e){
+				//variable evento 
+				var key = ( e.keyCode ? e.keyCode : e.which);
+				//Solo detectar y presionar si es un número
+				console.log(key);
+				if( key == 8 ) { 
+					return true; 
+				}
+            	else if ( key < 48 || key > 58) { return false;  }
+			});
+		}
+
+		/*|-------------------------------------------------------------|*/
 		/*|-----  VALIDADOR FORMULARIO.  ------|*/
 		/*|--------------------------------------------------------------|*/
 
