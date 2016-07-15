@@ -53,10 +53,10 @@
 							<!-- Span --> <span style="color: <?= $term_option['theme_tax_color'] ?>"> <?= $term_category_product->name ?> </span>
 							</h2>
 						</div> <!-- /.text-xs-center -->
-						<!-- Descripcion -->
-						<?= apply_filters('the_content' , $term_category_product->description ); ?>
-						<!-- Meta descripción -->
-						<span class="meta-description"> <?= $term_option['theme_tax_extra_info']; ?> </span>
+						<!-- Meta info 1 - Slogan -->
+						<p><?= $term_option['theme_tax_extra_info']; ?> </p>
+						<!-- Meta info 2 -->
+						<span class="meta-description"> <?= $term_option['theme_tax_extra_info2']; ?> </span>
 
 						<!-- Botón ver más -->
 						<div class="text-xs-center">

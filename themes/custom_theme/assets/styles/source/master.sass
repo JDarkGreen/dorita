@@ -551,9 +551,6 @@ body,html
 .bgOrangeDark
 	background-color: $theme_orange_dark
 
-
-
-
 /*[ $TEXTOS ] */
 
 //Texto Web
@@ -567,6 +564,28 @@ body,html
 		+animation( heartbeat 1s )  
 		color          : $theme_orange
 		text-decoration: none 
+
+/*[ MKIGAS DE PAN O BREADBCRUMBS ] */
+.sectionBreadcrums
+	ul 
+		li 
+			display: inline-block
+			margin : 0
+			padding: 0
+			a 
+				border-right   : 1px solid black 
+				color          : black  
+				display        : block
+				font-family    : "Arial" , sans-serif
+				font-size      : 14px 
+				font-weight    : 600 
+				line-height    : 1em
+				padding        : 0 7px 
+				text-decoration: none
+			//&:ultimo elemento de la lista
+			&:last-child
+				a 
+					border-right: none
 
 /***************************************************************************************/
 /**--  HEADER   ----------------------------------------------------------------------**/
@@ -863,6 +882,75 @@ body,html
 
 
 /***************************************************************************************/
+/**--  PÁGINA PRODUCTOS --------------------------------------------------------------**/
+/***************************************************************************************/
+
+//CONTENEDOR DE PRODUCTOS
+.pageProduct__content
+	margin: 60px auto 0
+
+//Vista previa de producto
+.itemProducto__preview
+	border   : 2px solid 
+	margin   : 0 auto 40px
+	max-width: 220px
+	width    : 100%
+	//Link
+	a 
+		text-decoration: none
+	//Figure - imagen
+	figure 
+		height: 265px
+		margin: 0
+		overflow: hidden
+		img 
+			+transition( all 600ms ease-in-out )
+		//hover 
+		&:hover 
+			img 
+				+scale( 1.2 )
+	//Titulo
+	h3 
+		color      : white 
+		font-size  : 24px
+		font-weight: 700
+		margin     : 0
+		padding    : 20px 0
+
+
+//SECCION - DETALLE DE PRODUCTO
+
+//SLOGAN DE PRODUCTO
+.itemProducto__slogan
+	display    : block
+	font-family: "Raleway" , sans-serif
+	font-size  : 24px
+	font-style : italic
+	font-weight: 600
+	line-height: 1.2em
+	margin     : 0 auto 60px
+
+
+/***************************************************************************************/
+/**--  PAGINA BLOG  ----------------------------------------------------------------**/
+/***************************************************************************************/
+
+/* Sobreescribiendo flechas de carousel sección Blog */
+.arrowCarouselBlog-prev
+	right: 6%
+.arrowCarouselBlog-next
+	right: 0
+
+/* Articulo de blog */
+.pageBlog__article
+	font-family: "Roboto Condensed" , sans-serif
+	/* Titulo */
+	h3 
+		font-size  : 30px 
+		font-weight: 600 
+
+
+/***************************************************************************************/
 /**--  PAGINA GALERÍA ----------------------------------------------------------------**/
 /***************************************************************************************/
 
@@ -910,24 +998,6 @@ body,html
 			margin : 0 auto 15px 
 			width  : 40px
 
-
-/***************************************************************************************/
-/**--  PAGINA BLOG  ----------------------------------------------------------------**/
-/***************************************************************************************/
-
-/* Sobreescribiendo flechas de carousel sección Blog */
-.arrowCarouselBlog-prev
-	right: 6%
-.arrowCarouselBlog-next
-	right: 0
-
-/* Articulo de blog */
-.pageBlog__article
-	font-family: "Roboto Condensed" , sans-serif
-	/* Titulo */
-	h3 
-		font-size  : 30px 
-		font-weight: 600 
 
 /***************************************************************************************/
 /**--  PÁGINA PEDIDOS --- ------------------------------------------------------------**/

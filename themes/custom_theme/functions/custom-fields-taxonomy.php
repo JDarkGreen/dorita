@@ -36,16 +36,36 @@ function theme_add_num_order( $value_number = 1 )
         return $output_function_order;
 }
 
-/** CAMPO PERSONALIZADO TEXAREA EXTRA INFO  **/
+/** CAMPO PERSONALIZADO TEXAREA EXTRA INFO 1  **/
 function theme_add_extra_info( $extra_info = "" )
 {
     ob_start(); //Encienda el búfer de salida ?>
     <tr class="form-field">  
         <th scope="row" valign="top">  
-            <label for="term_meta[theme_tax_extra_info]"><?php _e('Meta Extra Información: '); ?></label> 
+            <label for="term_meta[theme_tax_extra_info]"><?php _e('Meta Extra Información 1: '); ?></label> 
         </th>   <!-- /.scope="row" -->
         <td>
             <textarea name="term_meta[theme_tax_extra_info]" style="width:320px; height: 100px; max-height:  100px;"> <?= $extra_info; ?> </textarea>
+            <p class="description"> <?php _e( "Escribe una información adicional para éste término", LANG ); ?></p>
+            <!-- Separación--> <br />
+        </td>
+    </tr> <!-- /.form-field -->
+    <?php
+        $output_function = ob_get_contents(); #Devolver el contenido del búfer de salida
+        ob_clean(); //Esta función desecha el contenido del búfer de salida. 
+        return $output_function;
+}
+
+/** CAMPO PERSONALIZADO TEXAREA EXTRA INFO 2 **/
+function theme_add_extra_info2( $extra_info = "" )
+{
+    ob_start(); //Encienda el búfer de salida ?>
+    <tr class="form-field">  
+        <th scope="row" valign="top">  
+            <label for="term_meta[theme_tax_extra_info2]"><?php _e('Meta Extra Información 2: '); ?></label> 
+        </th>   <!-- /.scope="row" -->
+        <td>
+            <textarea name="term_meta[theme_tax_extra_info2]" style="width:320px; height: 100px; max-height:  100px;"> <?= $extra_info; ?> </textarea>
             <p class="description"> <?php _e( "Escribe una información adicional para éste término", LANG ); ?></p>
             <!-- Separación--> <br />
         </td>
@@ -136,6 +156,11 @@ function theme_taxonomy_add_custom_fields()
     echo theme_add_extra_info();
 
     /**
+    *  CAMPO PERSONALIZADO TEXAREA EXTRA INFO 2
+    **/
+    echo theme_add_extra_info2();
+
+    /**
     * CAMPO PERSONALIZADO IMAGEN
     **/
     echo theme_add_image();
@@ -166,6 +191,12 @@ function theme_taxonomy_edit_custom_fields( $term  ) {
     **/
     $value_extra_info = $term_meta['theme_tax_extra_info'];
     echo theme_add_extra_info( $value_extra_info );
+
+    /**
+    *  CAMPO PERSONALIZADO TEXAREA EXTRA INFO 2
+    **/
+    $value_extra_info2 = $term_meta['theme_tax_extra_info2'];
+    echo theme_add_extra_info2( $value_extra_info2 );
 
     /**
     * CAMPO PERSONALIZADO IMAGEN
