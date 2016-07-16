@@ -55,8 +55,8 @@
 				<div class="row">
 					
 					<!-- IMAGEN -->
-					<div class="col-xs-12 col-md-4">
-						<div class="itemProducto__preview" style="border-color: <?= $current_color ?> !important;">
+					<div class="col-xs-12 col-md-7">
+						<div class="itemProducto itemProducto__detail" style="border-color: <?= $current_color ?> !important;">
 							<!-- Imagen -->
 							<figure class="container-flex align-content">
 								<?php 
@@ -69,10 +69,10 @@
 							<!-- Nombre o titulo -->
 							<h3 class="text-capitalize text-xs-center" style="background-color: <?= $current_color; ?> !important; "><?= __( $post->post_title , LANG ); ?></h3>
 						</div> <!-- /.itemProducto__preview -->
-					</div> <!-- /.col-xs-12 col-md-4 -->
+					</div> <!-- /.col-xs-12 col-md-7 -->
 
 					<!-- CONTENIDO o detalle de producto -->
-					<div class="col-xs-12 col-md-8">
+					<div class="col-xs-12 col-md-5">
 						
 						<div class="itemProducto__details">
 							<!-- Titulo --> 
@@ -102,7 +102,7 @@
 						<!-- BOTON VOLVER A PRODUCTOS -->
 						<a href="<?= get_term_link( $category_product ); ?>" class="btnCommon__show-more text-uppercase"> <?php _e( "volver" , LANG ); ?></a>
 
-					</div> <!-- /.col-xs-12 col-md-8 -->
+					</div> <!-- /.col-xs-12 col-md-5 -->
 
 				</div> <!-- /.row -->
 			</section> <!-- /.pageProduct__content -->

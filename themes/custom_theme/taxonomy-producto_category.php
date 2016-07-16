@@ -86,9 +86,10 @@
 						<?php if( $control_row % $item_per_row == 0 ) : ?>
 							<div class="row">
 						<?php endif; ?>
-
+						
+						<!-- CONTENEDOR IMAGEN -->
 						<div class="col-xs-12 col-md-4">
-							<article class="itemProducto__preview" style="border-color: <?= $current_color ?> !important;">
+							<article class="itemProducto itemProducto__preview" style="border-color: <?= $current_color ?> !important;">
 								<!-- Link -->
 								<a href="<?= get_permalink( $producto->ID ); ?>" class="center-block">
 									<!-- Imagen -->
