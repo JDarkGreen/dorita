@@ -1114,8 +1114,10 @@ body,html
 
 //SECCION DE PRODUCTOS
 .productSection
-	border: 1px solid $theme_gray
-	margin: 0 auto 24px 
+	+border-radius( 10px 10px 0 0 )
+	border  : 1px solid $theme_gray
+	margin  : 0 auto 24px 
+	overflow: hidden
 	//Titulo
 	h3 
 		background : $theme_green
@@ -1161,6 +1163,7 @@ body,html
 
 /* Sección Formulario de Contacto */
 .pageContacto__formulary
+	+border-radius( 10px )
 	background: $theme_orange_dark
 	max-width : 480px
 	padding   : 40px
@@ -1184,7 +1187,7 @@ body,html
 		border    : 1px solid $theme_orange
 		color     : white
 		outline   : 0
-		padding   : 7px 20px 
+		padding   : 10px
 		width     : 100%
 	/* Solo texarea */
 	textarea
