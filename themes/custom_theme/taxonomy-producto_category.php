@@ -15,7 +15,7 @@
 
 	// Seteamos la variable banner de acuerdo al objeto
 	$banner  = $current_product_cat;  
-	include( locate_template("partials/banner-common-pages.php") ); 
+	include( locate_template("partials/banner-common-taxonomy.php") ); 
 
 	/**
 	* OBTENEMOS TODOS LOS CAMPOS PERSONALIZADOS EN EL ADMIN DE ESTE OBJETO - CATEGORIA
@@ -95,7 +95,7 @@
 								<!-- Link -->
 								<a href="<?= get_permalink( $producto->ID ); ?>" class="center-block">
 									<!-- Imagen -->
-									<figure class="container-flex align-content">
+									<figure class="">
 										<?php 
 											if( has_post_thumbnail($producto->ID) ) : 
 											echo get_the_post_thumbnail($producto->ID , 'full' , array('class'=>'img-fluid imgNotBlur') );

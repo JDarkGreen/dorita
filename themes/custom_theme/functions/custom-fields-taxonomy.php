@@ -76,6 +76,56 @@ function theme_add_extra_info2( $extra_info = "" )
         return $output_function;
 }
 
+/** CAMPO PERSONALIZADO IMAGEN BANNER DE PAGINA  **/
+function theme_add_banner_image( $value_image = "" )
+{
+    ob_start(); //Encienda el búfer de salida ?>
+    <tr class="form-field">  
+        <th scope="row" valign="top">  
+            <label for="term_meta[theme_tax_banner_img]"><?php _e('Agregar Imagen Banner de Página'); ?></label>  
+        </th>  
+        <td>  
+
+            <!-- Contenedor de Imagen -->
+            <section class="customize-img-container">
+
+                <!-- Input oculto guarda imagen -->
+                <input type="hidden" id="theme_tax_banner_img" class="" name="term_meta[theme_tax_banner_img]" size="25" style="width:60%;" value="<?= $value_image; ?>" />
+
+                <!-- Separación --> <p></p>
+                <!-- Contenedor Agregar Imagen Previa -->
+                <div class="container-preview">
+                    <?php if( !empty($value_image) && !is_null($value_image) ) : ?>
+                    <img src="<?= $value_image; ?>" style="width:250px; height:100px;" />
+                    <?php endif ?>
+                </div> 
+                
+                <!-- Separación --> <p></p>
+                <!-- Botón agregar imágen --> 
+                <button id="js-add-img-tax" class="js-add-img-tax button button-primary" data-class-img="banner" data-input="term_meta[theme_tax_banner_img_<?= $t_id; ?>]" >
+                    <?php empty($value_image) || is_null($value_image) ? _e( 'Agregar Imagen' , LANG ) : _e( 'Cambiar Imagen' , LANG ) ; ?>
+                </button> 
+
+                <!-- Botón remover Imagen Oculto -->
+                <button id="js-remove-img-tax" class="js-remove-img-tax button button-primary" data-class-img="banner">
+                    <?php _e( 'Remover Imagen' , LANG ); ?>
+                </button> 
+
+                <!-- Separación --> <p></p>
+
+                <!-- Descripcion -->
+                <p class="description"><?php _e('Subir una imagen de banner'); ?></p>
+                <br/>  
+
+            </section> <!-- /.customize-img-container -->
+        </td>  
+    </tr> 
+    <?php
+        $output_function = ob_get_contents(); #Devolver el contenido del búfer de salida
+        ob_clean(); //Esta función desecha el contenido del búfer de salida. 
+        return $output_function;
+}
+
 /** CAMPO PERSONALIZADO IMAGEN  **/
 function theme_add_image( $value_image = "" )
 {
@@ -85,32 +135,39 @@ function theme_add_image( $value_image = "" )
             <label for="term_meta[theme_tax_img]"><?php _e('Agregar Imagen Destacada'); ?></label>  
         </th>  
         <td>  
-            <input type="hidden" id="theme_tax_img" name="term_meta[theme_tax_img]" size="25" style="width:60%;" value="<?= $value_image; ?>" />
 
-            <!-- Separación --> <p></p>
-            <!-- Contenedor Agregar Imagen Previa -->
-            <div class="container-preview">
-                <?php if( !empty($value_image) && !is_null($value_image) ) : ?>
-                <img src="<?= $value_image; ?>" style="width:150px; height:150px;" />
-                <?php endif ?>
-            </div> 
-            
-            <!-- Separación --> <p></p>
-            <!-- Botón agregar imágen --> 
-            <button id="js-add-img-tax" class="button button-primary" data-input="term_meta[theme_tax_img_<?= $t_id; ?>]" >
-                <?php empty($value_image) || is_null($value_image) ? _e( 'Agregar Imagen' , LANG ) : _e( 'Cambiar Imagen' , LANG ) ; ?>
-            </button> 
+            <!-- Contenedor de Imagen -->
+            <section class="customize-img-container">
 
-            <!-- Botón remover Imagen Oculto -->
-            <button id="js-remove-img-tax" class="button button-primary">
-                <?php _e( 'Remover Imagen' , LANG ); ?>
-            </button> 
+                <!-- Input oculto guarda imagen -->
+                <input type="hidden" id="theme_tax_img" class="" name="term_meta[theme_tax_img]" size="25" style="width:60%;" value="<?= $value_image; ?>" />
 
-            <!-- Separación --> <p></p>
+                <!-- Separación --> <p></p>
+                <!-- Contenedor Agregar Imagen Previa -->
+                <div class="container-preview">
+                    <?php if( !empty($value_image) && !is_null($value_image) ) : ?>
+                    <img src="<?= $value_image; ?>" style="width:150px; height:150px;" />
+                    <?php endif ?>
+                </div> 
+                
+                <!-- Separación --> <p></p>
+                <!-- Botón agregar imágen --> 
+                <button id="js-add-img-tax" class="js-add-img-tax button button-primary" data-class-img="image" data-input="term_meta[theme_tax_img_<?= $t_id; ?>]" >
+                    <?php empty($value_image) || is_null($value_image) ? _e( 'Agregar Imagen' , LANG ) : _e( 'Cambiar Imagen' , LANG ) ; ?>
+                </button> 
 
-            <!-- Descripcion -->
-            <p class="description"><?php _e('Subir una imagen destacada medida: 198x172'); ?></p>
-            <br/>  
+                <!-- Botón remover Imagen Oculto -->
+                <button id="js-remove-img-tax" class="js-remove-img-tax button button-primary" data-class-img="image">
+                    <?php _e( 'Remover Imagen' , LANG ); ?>
+                </button> 
+
+                <!-- Separación --> <p></p>
+
+                <!-- Descripcion -->
+                <p class="description"><?php _e('Subir una imagen destacada medida: 198x172'); ?></p>
+                <br/>  
+
+            </section> <!-- /.customize-img-container -->
         </td>  
     </tr> 
     <?php
@@ -161,6 +218,11 @@ function theme_taxonomy_add_custom_fields()
     echo theme_add_extra_info2();
 
     /**
+    * CAMPO PERSONALIZADO BANNER IMAGEN
+    **/
+    echo theme_add_banner_image();
+
+    /**
     * CAMPO PERSONALIZADO IMAGEN
     **/
     echo theme_add_image();
@@ -197,6 +259,12 @@ function theme_taxonomy_edit_custom_fields( $term  ) {
     **/
     $value_extra_info2 = $term_meta['theme_tax_extra_info2'];
     echo theme_add_extra_info2( $value_extra_info2 );
+
+    /**
+    * CAMPO PERSONALIZADO BANNER IMAGEN
+    **/
+    $value_banner_img = $term_meta['theme_tax_banner_img'];
+    echo theme_add_banner_image( $value_banner_img );
 
     /**
     * CAMPO PERSONALIZADO IMAGEN

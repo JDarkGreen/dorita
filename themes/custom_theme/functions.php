@@ -103,6 +103,11 @@ include_once("functions/admin/new-columns.php");
 /***********************************************************************************************/
 require_once('functions/admin/theme-customizer.php');
 
+/***********************************************************************************************/
+/* Ordenamiento de columnas personalizadas del Thema  */
+/***********************************************************************************************/
+require_once('functions/admin/add_sortable_admin_columns.php');
+
 
 
 ?>

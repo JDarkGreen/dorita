@@ -10,6 +10,7 @@
 <?php
 	global $post; //Objeto actual - Pagina 
 	$banner = $post;  // Seteamos la variable banner de acuerdo al post
+	//$banner = get_page_by_path("galerias");
 	include( locate_template("partials/banner-common-pages.php") ); 
 ?>
 

@@ -57,12 +57,15 @@ var j = jQuery.noConflict();
 		/*************************************************************************
 		* SECCIÓN SUBIR IMAGENES A TÉRMINOS DE TAXONOMÍAS
 		**************************************************************************/
-	    if( j("#js-add-img-tax").length ){ 
-	    	var btn_add_img_tax = j("#js-add-img-tax");
+	    if( j(".js-add-img-tax").length ){ 
+	    	var btn_add_img_tax = j(".js-add-img-tax");
 
 	    	btn_add_img_tax.on('click', function(e){
 	    		//Prevenir accion por defecto
 	    		e.preventDefault();
+
+	    		//Referenciarse asi mismo
+	    		var this_btn_add_img = j(this);
 			
 				//var input_img_tax = j(this).attr('data-input');
 				var Uploader;
@@ -82,7 +85,26 @@ var j = jQuery.noConflict();
 				Uploader.on('select', function() {
 					attachment = Uploader.state().get('selection').first().toJSON();
 
-					var campo_field = j("input[name='term_meta[theme_tax_img]");
+					//Extraer que tipo de campo es
+					// imagen -banner -extra imagen
+					var tipo_campo  = this_btn_add_img.attr("data-class-img");  
+					var campo_field;
+
+					//segun sea el tipo
+					switch( tipo_campo )
+					{
+						//imagen
+						case "image" :
+							campo_field = j("input[name='term_meta[theme_tax_img]");
+						break;
+						//banner
+						case "banner" :
+							campo_field = j("input[name='term_meta[theme_tax_banner_img]");
+						break;
+					}
+
+					console.log(tipo_campo);
+
 					//console.log(campo_field);
 	          		//setea el campo
 	          		campo_field.val(attachment.url);
@@ -93,11 +115,11 @@ var j = jQuery.noConflict();
 	          		vistaPrevia += "</a>";
 
 	          		//al contenedor de vista previa
-	          		btn_add_img_tax.parent()
+	          		this_btn_add_img.parent(".customize-img-container")
 	          		.find(".container-preview").html("").html( vistaPrevia );
 
 	          		//cambiar texto de boton
-	          		btn_add_img_tax.html( "Cambiar Imagen" );
+	          		this_btn_add_img.html( "Cambiar Imagen" );
 
 	          	});
 
@@ -109,13 +131,31 @@ var j = jQuery.noConflict();
 	    /**
 	    * Botón Remover Imagen Subida a termino de taxonomía
 	    */
-	    j("#js-remove-img-tax").on('click',function(e){
+	    j(".js-remove-img-tax").on('click',function(e){
 	    	//remover funcion por defecto
 	    	e.preventDefault(); 
+			//Extraer que tipo de campo es
+			// imagen -banner -extra imagen
+			var tipo_campo  = j(this).attr("data-class-img");  
+			var campo_field;
+
+			//segun sea el tipo
+			switch( tipo_campo )
+			{
+				//imagen
+				case "image" :
+					campo_field = j("input[name='term_meta[theme_tax_img]");
+				break;
+				//banner
+				case "banner" :
+					campo_field = j("input[name='term_meta[theme_tax_banner_img]");
+				break;
+			}
+
 	    	//Remover el valor actual del campo oculto
-	    	j("#theme_tax_img").val("");
+	    	campo_field.val("");
 	    	//Eliminar la imagen preview 
-	    	j(this).parent().find(".container-preview").html("");
+	    	j(this).parent(".customize-img-container").find(".container-preview").html("");
 	    	//Cambiar texto de botón de agregado
 	    	j("#js-add-img-tax").html( "Agregar Imagen" );
 	    });
