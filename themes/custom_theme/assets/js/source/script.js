@@ -45,6 +45,7 @@ var j = jQuery.noConflict();
 		/*|----------------------------------------------------------------------|*/
 		/*|-----  CAROUSEL HOME LIBRERIA  -----|*/
 		/*|----------------------------------------------------------------------|*/
+		/*
 		var CarouselHome = j("#carousel-home").carousel({ interval: 7000 , pause : "" });
 
 		//Flechas de carousel Home
@@ -59,7 +60,7 @@ var j = jQuery.noConflict();
 		});
 
 		/* VARIABLE DE CONTROL */
-		var controlCarousel = 0;
+		/*var controlCarousel = 0;
 
 		//Eventos - al comenzar carousel
 		CarouselHome.on('slide.bs.carousel', function ( e ) {
@@ -84,10 +85,10 @@ var j = jQuery.noConflict();
 			controlCarousel = controlCarousel > 1 ? controlCarousel = 0 : controlCarousel; 
 
 			/* Extraer elemento actual activo */
-			var CurrentItem = j(this).find('.active');
+			//var CurrentItem = j(this).find('.active');
 
 			/* Colocar Imagen */
-			if( controlCarousel == 0 )
+			/*if( controlCarousel == 0 )
 			{
 				if( !CurrentItem.hasClass('overlayZoom') ) 
 					CurrentItem.addClass("overlayZoom");
@@ -98,10 +99,52 @@ var j = jQuery.noConflict();
 			}
 
 			/* Aumentar la variable de control alert( controlCarousel ); */
-			controlCarousel++;
+			//controlCarousel++;
 
+		//});
 
+		/*|----------------------------------------------------------------------|*/
+		/*|-----  CAROUSEL HOME  LIBRERIA REVslider -----|*/
+		/*|----------------------------------------------------------------------|*/
+		if ( j.fn.cssOriginal!=undefined)   // CHECK IF fn.css already extended
+        j.fn.css =  j.fn.cssOriginal;
+
+    	// Setear revolution slider
+		var api_rev = j("#carousel-home").revolution({
+			delay           : 6000, 
+			fullWidth       : "on",
+			navigationArrows: "none",
+			navigationType  : 'none', // use none, bullet or thumb
+			onHoverStop     : "off",
+			startheight     : 386,
+		}); 
+
+		// Eventos para flechas
+		j("#pageInicio__slider__arrows a").on( "click" , function(e){
+			e.preventDefault(); // prevent default evento
+			//obtener movimiento
+			var movement = j(this).attr("data-move");
+			//segun movimiento
+			switch( movement ){
+				case 'prev': api_rev.revprev(); break;
+				case 'next': api_rev.revnext(); break;
+				default    : api_rev.revprev(); break;
+			}
 		});
+
+		// Eventos para indicadores - dots 
+		j("#pageInicio__slider__dots a").on( "click" , function(e){
+			e.preventDefault(); // prevent default evento
+			//obtener el orden de slider
+			var index_slider = parseInt( j(this).attr("data-dot") );
+			//remover clase activa a todos los indicadores
+			j("#pageInicio__slider__dots a").removeClass("active");
+			//mover el carousel a esta posición
+			api_rev.revshowslide( index_slider );
+			//agregar clase a elemento actual
+			j(this).addClass("active");
+		});
+
 
 		/*|----------------------------------------------------------------------|*/
 		/*|-----  EVENTOS FLECHAS CAROUSEL COMUNES  -----|*/

@@ -48,6 +48,8 @@
 				<?php endif; ?>
 			</div> <!-- /.pageProduct__content-description -->
 
+		    <!-- Limpiar floats -->	<div class="clearfix"></div>
+
 			<!-- Contenedor Productos de ésta categoría -->
 			<section class="pageProduct__content">
 					<?php  

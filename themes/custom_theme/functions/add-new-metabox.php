@@ -67,7 +67,8 @@ add_action( 'add_meta_boxes', 'add_img_banner_extra' );
 
 function add_img_banner_extra() {
   //add more in here as you see fit
-  $screens = array( 'banner' ); 
+  $screens = array( 'slider-home' ); 
+
   foreach ($screens as $screen) {
   	add_meta_box(
       'attachment_img_banner_home', //this is the id of the box
@@ -297,7 +298,7 @@ function cd_meta_box_url_video_save( $post_id )
 //Este metabox al darle check agrega una clase en el banner Home
 //que permite alinear contenido a la izquierda o derecha respectivamente
 
-add_action( 'add_meta_boxes', 'cd_banner_text_add' );
+/*add_action( 'add_meta_boxes', 'cd_banner_text_add' );
 function cd_banner_text_add()
 {
     add_meta_box( 'mb-text-banner', 'Alinear Contenido de Banner', 'cd_banner_text_cb', 'banner', 'side', 'high' );
@@ -334,40 +335,118 @@ function cd_banner_text_save( $post_id )
     // This is purely my personal preference for saving check-boxes
     $chk = isset( $_POST['banner_text_check'] ) && $_POST['banner_text_check'] ? 'on' : 'off';
     update_post_meta( $post_id, 'banner_text_check', $chk );
-}
+}*/
 
 
 /*|-------------------------------------------------------------------------|*/
-/*|------------ METABOX EDITOR WYSIWYG PARA CADA SERVICIO  -----------------|*/
+/*|------------ METABOX SLIDER REVOLUTION SLIDER HOME   -----------------|*/
 /*|-------------------------------------------------------------------------|*/
 
-//Este metabox permite agregar un editor de texto para el segundo paquete
-//en este caso de servicio
-/*add_action('add_meta_boxes', 'theme_register_add_editors');
+//Este metabox permite personalizar efectos de cada slider
+//segun el plugin revslider js
+add_action('add_meta_boxes', 'theme_add_revslider_home');
 
-function theme_register_add_editors(){
-	add_meta_box('WYSIWG_THEME_PERF' , __('Servicio: Paquete 2' , LANG ) , 'custom_theme_cb' , array('servicio') );
+function theme_add_revslider_home()
+{
+	add_meta_box( 'mb-sliderhome', 'Customizar SliderHome', 'theme_mb_revslider_home_cb', array('slider-home' ) , 'side', 'high' );
 }
 
-function custom_theme_cb(){
-	global $post;
-	$option_content = array('editor_height'=>'200');
+//customizar box
+function theme_mb_revslider_home_cb( $post )
+{
+	// $post is already set, and contains an object: the WordPress post
+    global $post;
 
-	echo "<h2><strong> Servicio: Información de 2 Paquete </strong></h2>";
-	$text1 = get_post_meta( $post->ID , 'custom_theme_'.$post->ID.'_pack2' , true );
-	wp_editor( htmlspecialchars_decode( $text1 ), 'custom_theme_'.$post->ID.'_pack2' , $option_content );	
+	$values = get_post_custom( $post->ID );
+	$selected = isset( $values['mb_revslider_select'] ) ? esc_attr( $values['mb_revslider_select'][0] ) : ”;
+
+	// We'll use this nonce field later on when saving.
+    wp_nonce_field( 'my_meta_box_nonce', 'meta_box_nonce' );
+
+    ?>
+    <p>
+        <label for="mb_revslider_select"> Elige Estilo para este Slider Home: </label>
+        <select name="mb_revslider_select" id="mb_revslider_select">
+        	<!-- boxslide -->
+            <option value="boxslide" <?php selected( $selected, 'boxslide' ); ?> >
+            	BoxSlide 
+            </option>
+        	<!-- Papercut -->
+            <option value="papercut" <?php selected( $selected, 'papercut' ); ?> >
+            	Papercut
+            </option>
+        	<!-- Cortina 1 -->
+            <option value="curtain-1" <?php selected( $selected, 'curtain-1' ); ?> >
+            	Cortina 1
+            </option>
+        	<!-- Cortina 2 -->
+            <option value="curtain-2" <?php selected( $selected, 'curtain-2' ); ?> >
+            	Cortina 2
+            </option>
+        	<!-- Cortina 3 -->
+            <option value="curtain-3" <?php selected( $selected, 'curtain-3' ); ?> >
+            	Cortina 3
+            </option>
+        	<!-- Cubo Vertical -->
+            <option value="cube" <?php selected( $selected, 'cube' ); ?> >
+            	Cubo Vertical
+            </option>
+        	<!-- Cubo Horizontal -->
+            <option value="cube-horizontal" <?php selected( $selected, 'cube-horizontal' ); ?> >
+            	Cubo Horizontal
+            </option>
+        	<!-- Incube Vertical -->
+            <option value="incube" <?php selected( $selected, 'incube' ); ?> >
+            	Incube Vertical
+            </option>
+        	<!-- Parallax a Derecha -->
+            <option value="parallaxtoright" <?php selected( $selected, 'parallaxtoright' ); ?> >
+            	Parallax a Derecha
+            </option>
+        	<!-- Parallax a Izquierda -->
+            <option value="parallaxtoleft" <?php selected( $selected, 'parallaxtoleft' ); ?> >
+            	Parallax a Izquierda
+            </option>
+        	<!-- Parallax Arriba -->
+            <option value="parallaxtotop" <?php selected( $selected, 'parallaxtotop' ); ?> >
+            	Parallax Arriba
+            </option>
+        	<!-- Zoom Out -->
+            <option value="zoomout" <?php selected( $selected, 'zoomout' ); ?> >
+            	Zoom Out
+            </option>
+        	<!-- Zoom In -->
+            <option value="zoomin" <?php selected( $selected, 'zoomin' ); ?> >
+            	Zoom In
+            </option>
+        </select>
+    </p>
+    <?php    
 }
+//guardar la data
+add_action( 'save_post', 'cd_mb_revslider_home_save' );
 
-function custom_theme_save_postdata( $post_id ){
-
-	if( !empty( $_POST['custom_theme_'.$post_id.'_pack2'] ) ){
-		$data = htmlspecialchars( $_POST['custom_theme_'.$post_id.'_pack2'] );
-		update_post_meta( $post_id, 'custom_theme_'.$post_id.'_pack2' , $data );
-	}
+function cd_mb_revslider_home_save( $post_id )
+{
+    // Bail if we're doing an auto save
+    if( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return;
+     
+    // if our nonce isn't there, or we can't verify it, bail
+    if( !isset( $_POST['meta_box_nonce'] ) || !wp_verify_nonce( $_POST['meta_box_nonce'], 'my_meta_box_nonce' ) ) return;
+     
+    // if our current user can't edit this post, bail
+    if( !current_user_can( 'edit_post' ) ) return;
+     
+    // now we can actually save the data
+    $allowed = array( 
+        'a' => array( // on allow a tags
+            'href' => array() // and those anchors can only have href attribute
+        )
+    );
+     
+    // Make sure your data is set before trying to save it
+    if( isset( $_POST['mb_revslider_select'] ) )
+        update_post_meta( $post_id, 'mb_revslider_select', esc_attr( $_POST['mb_revslider_select'] ) );
 }
-
-//Save the Data
-add_action( 'save_post', 'custom_theme_save_postdata' );*/
-
 
 ?>

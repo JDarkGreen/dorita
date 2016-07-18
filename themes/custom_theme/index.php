@@ -5,7 +5,9 @@
 ?>
 
 <!-- Incluir Slider de Portada -->
-<?php include(locate_template('partials/slider-home.php')); ?>
+<?php include(locate_template('partials/slider-home-revolution.php')); ?>
+
+<!-- Separador --> <p></p>
 
 <?php  
 /**
@@ -88,7 +90,7 @@ include(locate_template('partials/section-category-products.php'));
 										$image = get_the_post_thumbnail( $articulo->ID , 'full' , array('class'=>'img-fluid center-block imgNotBlur') ); 
 										if( !empty($image) ) : echo $image; else:
 									?>
-										<img src="http://lorempixel.com/980/672/sports" alt="lorempixel" class="img-fluid center-block imgNotBlur" />
+										<img src="https://placeimg.com/980/672/any" alt="lorempixel" class="img-fluid center-block imgNotBlur" />
 									<?php endif; ?>
 									</figure><!-- /figure -->
 

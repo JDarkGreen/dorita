@@ -390,6 +390,14 @@ body,html
 	height    : 1px 
 	width     : 100%
 
+//LINEA SEPARADORA SLIDER 
+#separator-line-slider
+	background     : url("../../images/img_separator_line.jpg") no-repeat 
+	background-size: cover 
+	display        : block 
+	height         : 5px 
+	width          : 100%
+
 //CORRECCION IMAGENES CAROUSEL
 .owl-carousel
 	.owl-item 
@@ -728,7 +736,7 @@ body,html
 /***************************************************************************************/
 
 //Slider De Página
-.pageInicio__slider
+/*.pageInicio__slider
 	//Wrapper
 	.carousel-inner
 		//Carousel Item
@@ -754,15 +762,86 @@ body,html
 					color      : $theme_blue
 					font-weight: 700
 				p 
-					font-size  : 30px
+					font-size  : 30px */
 
-/* Flechas de Slider */
-.arrowSliderHome
-	margin: -20px auto 0
-.arrowSliderHome--prev
-	left : 2%
-.arrowSliderHome--next 
-	right: 2%
+//Slider de Página Revolution Slider
+
+/** [ Imagen Extra de Carousel ] **/
+.item-slider__extra-img
+	max-width: 580px
+	width    : 100%
+
+/* [ Contenido o caption de carousel ] */
+.pageInicio__slider__content
+	+text-shadow( 0px 1px 14px black )
+	color      : white 
+	font-family: "Fredoka One", cursive
+	max-width  : 470px
+	white-space: normal
+	width      : 100%
+	word-break : keep-all
+	// Título 
+	h2 
+		font-size  : 41px
+		font-weight: 700
+		line-height: 1.4em
+
+//Contenedor de meta contenido
+.pageInicio__slider__meta-content
+	color  : white 
+	padding: 0 0 0 70px
+	//Párrafos o contenido del texto
+	p 
+		color      : $theme_yellow
+		font-size  : 35px 
+		font-weight: 700
+		line-height: 1em 
+		margin     : 0 auto 22px 
+	//extracto del slider
+	span 
+		display    : block 
+		font-family: "Raleway", sans-serif
+		font-size  : 20px 
+		font-style : italic 
+		font-weight: 600
+		max-width  : 255px
+
+/** [ Flechas de Carousel ] **/
+.pageInicio__slider__arrows
+	a 
+		color          : white 
+		font-size      : 70px 
+		line-height    : 1em 
+		margin         : -35px 0 auto 
+		position       : absolute
+		text-decoration: none
+		top            : 50%
+		z-index        : 999
+		//variacion izquierda y derecha 
+		&.arrow-prev
+			left: 5% 
+		&.arrow-next 
+			right: 5% 
+
+/** [ Indicadores o dots de Slider ] **/
+.pageInicio__slider__dots
+	bottom  : 10px 
+	left    : 0
+	position: absolute
+	right   : 0
+	z-index : 99
+	//Link a 
+	a 
+		+border-radius( 50% )
+		+transition( all 500ms ease )
+		background: white 
+		display   : inline-block
+		height    : 14px 
+		margin    : 0 4px 
+		width     : 14px 
+		//hover and active
+		&:hover , &.active
+			background : $theme_yellow
 
 //SECCIÓN CATEGORIAS DE PRODUCTOS
 .pageInicio__product-categories
